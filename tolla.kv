@@ -1,0 +1,126 @@
+MDNavigationLayout:
+    MDScreenManager:
+        MDScreen:
+            MDScrollView:
+                MDBoxLayout:
+                    adaptive_height: True
+                    orientation: "vertical"
+                    spacing: "15dp"
+
+                    MDTopAppBar:
+                        MDTopAppBarLeadingButtonContainer:
+                            MDActionTopAppBarButton:
+                                icon: "menu"
+                                do_scroll_x: False
+                                adaptive_size: True
+
+                    MDLabel:
+                        text: "Система вала"
+
+                    MDTextField:
+                        mode: "outlined"
+
+                        MDTextFieldLeadingIcon:
+                            icon: "diameter-variant"
+
+                        MDTextFieldHintText:
+                            text: "Введите диаметер вала в мм"
+
+                        MDTextFieldMaxLengthText:
+                            max_text_length: 4
+
+                    # TODO do dropdown menu for letter of tolerance range
+                    # TODO do dropdown menu for number of tolerance range
+
+                    MDLabel:
+                        text: "Система отверстия"
+
+                    MDTextField:
+                        mode: "outlined"
+
+                        MDTextFieldLeadingIcon:
+                            icon: "diameter-variant"
+
+                        MDTextFieldHintText:
+                            text: "Введите диаметер отверстия в мм"
+
+                        MDTextFieldMaxLengthText:
+                            max_text_length: 4
+
+                    # TODO do dropdown menu for letter of tolerance range
+                    # TODO do dropdown menu for number of tolerance range
+
+                    MDLabel:
+                        text: "Поле допуска вала"
+
+                    MDGridLayout:
+                        adaptive_size: True
+                        cols: 1
+                        rows: 2
+
+                        MDLabel:
+                            adaptive_size: True
+
+                        MDLabel:
+                            adaptive_size: True
+
+                    MDLabel:
+                        text: "Поле допуска отверстия"
+
+                    MDGridLayout:
+                        adaptive_size: True
+                        cols: 1
+                        rows: 2
+
+                        MDLabel:
+                            adaptive_size: True
+
+                        MDLabel:
+                            adaptive_size: True
+
+                    MDLabel:
+                        text: "Наибольший предельный размер вала"
+
+                    MDLabel:
+
+                    MDLabel:
+                        text: "Наибольший предельный разимер отверстия"
+
+                    MDLabel:
+
+                    MDLabel:
+                        text: "Допуск вала (Td)"
+
+                    MDLabel:
+
+                    MDLabel:
+                        text: "Допуск отверстия (TD)"
+
+                    MDLabel:
+
+                    MDLabel:
+                        text: "Максимальный гарантированный зазор"
+
+                    MDLabel:
+
+                    MDLabel:
+                        text: "Минимальный гарантированный зазор"
+
+                    MDLabel:
+
+    MDNavigationDrawer:
+        MDNavigationDrawerMenu:
+            MDNavigationDrawerItem:
+                MDNavigationDrawerItemLeadingIcon:
+                    icon: "cog"
+
+                MDNavigationDrawerItemText:
+                    text: "Настройки"
+
+            MDNavigationDrawerItem:
+                MDNavigationDrawerItemLeadingIcon:
+                    icon: "currency-usd"
+
+                MDNavigationDrawerItemText:
+                    text: "Донат"
+

@@ -1,5 +1,8 @@
+from tolla_app import TollaApp
+
+
 def main():
-    print("Hello from tolla!")
+    TollaApp().run()
 
 
 if __name__ == "__main__":
