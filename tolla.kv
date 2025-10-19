@@ -13,11 +13,13 @@ MDNavigationLayout:
                                 icon: "menu"
                                 do_scroll_x: False
                                 adaptive_size: True
+                                on_release: nav_drawer.set_state("toggle")
 
                     MDLabel:
-                        text: "Система вала"
+                        text: "Диаметр вала"
 
                     MDTextField:
+                        id: shaft_diameter_text_field
                         mode: "outlined"
 
                         MDTextFieldLeadingIcon:
@@ -29,13 +31,24 @@ MDNavigationLayout:
                         MDTextFieldMaxLengthText:
                             max_text_length: 4
 
-                    # TODO do dropdown menu for letter of tolerance range
-                    # TODO do dropdown menu for number of tolerance range
+                    MDLabel:
+                        text: "Поле допуск вала"
+
+                    MDDropDownItem:
+                        MDDropDownItemText:
+                            id: shaft_tolerance_range_letter_text
+                            text: "Введите букву поля допуска"
+
+                    MDDropDownItem:
+                        MDDropDownItemText:
+                            id: shaft_tolerance_range_number_text
+                            text: "Введите число поля допуска"
 
                     MDLabel:
-                        text: "Система отверстия"
+                        text: "Диаметр отверстия"
 
                     MDTextField:
+                        id: hole_diameter_text_field
                         mode: "outlined"
 
                         MDTextFieldLeadingIcon:
@@ -47,70 +60,74 @@ MDNavigationLayout:
                         MDTextFieldMaxLengthText:
                             max_text_length: 4
 
-                    # TODO do dropdown menu for letter of tolerance range
-                    # TODO do dropdown menu for number of tolerance range
-
-                    MDLabel:
-                        text: "Поле допуска вала"
-
-                    MDGridLayout:
-                        adaptive_size: True
-                        cols: 1
-                        rows: 2
-
-                        MDLabel:
-                            adaptive_size: True
-
-                        MDLabel:
-                            adaptive_size: True
-
                     MDLabel:
                         text: "Поле допуска отверстия"
 
-                    MDGridLayout:
-                        adaptive_size: True
-                        cols: 1
-                        rows: 2
+                    MDDropDownItem:
+                        MDDropDownItemText:
+                            id: hole_tolerance_range_letter_text
+                            text: "Введите букву поля допуска"
 
-                        MDLabel:
-                            adaptive_size: True
-
-                        MDLabel:
-                            adaptive_size: True
-
-                    MDLabel:
-                        text: "Наибольший предельный размер вала"
+                    MDDropDownItem:
+                        MDDropDownItemText:
+                            id: hole_tolerance_range_number_text
+                            text: "Введите число поля допуска"
 
                     MDLabel:
+                        text: "Верхнее отклонение вала"
 
                     MDLabel:
-                        text: "Наибольший предельный разимер отверстия"
+                        id: upper_shaft_deflection_label
 
                     MDLabel:
+                        text: "Нижнее отклонение вала"
 
                     MDLabel:
-                        text: "Допуск вала (Td)"
+                        id: lower_shaft_deflection_label
 
                     MDLabel:
+                        text: "Верхнее отклонение отверстия"
 
                     MDLabel:
-                        text: "Допуск отверстия (TD)"
+                        id: upper_hole_deflection_label
 
                     MDLabel:
+                        text: "Нижнее отклонение отверстия"
+
+                    MDLabel:
+                        id: lower_hole_deflection_label
 
                     MDLabel:
                         text: "Максимальный гарантированный зазор"
 
                     MDLabel:
+                        id: maximum_guaranteed_clearance_label
 
                     MDLabel:
                         text: "Минимальный гарантированный зазор"
 
                     MDLabel:
+                        id: minimum_guaranteed_clearance_label
+
+                    MDLabel:
+                        text: "Посадка"
+
+                    MDLabel:
+                        id: fit_label
+
+                    MDLabel:
+                        text: "Система посадки"
+
+                    MDLabel:
+                        id: fit_system_label
 
     MDNavigationDrawer:
+        id: nav_drawer
+
         MDNavigationDrawerMenu:
             MDNavigationDrawerItem:
+                id: settings_button
+
                 MDNavigationDrawerItemLeadingIcon:
                     icon: "cog"
 
@@ -118,6 +135,8 @@ MDNavigationLayout:
                     text: "Настройки"
 
             MDNavigationDrawerItem:
+                id: donate_button
+
                 MDNavigationDrawerItemLeadingIcon:
                     icon: "currency-usd"
 

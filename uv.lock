@@ -191,10 +191,11 @@ source = { url = "https://github.com/kivymd/KivyMD/archive/master.zip" }
 dependencies = [
     { name = "asynckivy" },
     { name = "kivy" },
+    { name = "materialshapes" },
     { name = "materialyoucolor" },
     { name = "pillow" },
 ]
-sdist = { hash = "sha256:94144e74c2b0cdad84725cb47cca1026f4f06323d9e9ea7b0a4f43ef8c97b479" }
+sdist = { hash = "sha256:23f59b3616d9426240739edfb4100fee36f841af21160089440f58cfc314b9e7" }
 
 [package.metadata]
 requires-dist = [
@@ -205,6 +206,7 @@ requires-dist = [
     { name = "flake8", marker = "extra == 'dev'" },
     { name = "isort", extras = ["pyproject"], marker = "extra == 'dev'" },
     { name = "kivy", specifier = ">=2.3.0" },
+    { name = "materialshapes", specifier = ">=0.3" },
     { name = "materialyoucolor", specifier = ">=2.0.7" },
     { name = "pillow" },
     { name = "pre-commit", marker = "extra == 'dev'" },
@@ -221,6 +223,20 @@ requires-dist = [
     { name = "sphinx-tabs", marker = "extra == 'docs'" },
 ]
 provides-extras = ["dev", "docs"]
+
+[[package]]
+name = "materialshapes"
+version = "0.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "kivy" },
+    { name = "pillow" },
+    { name = "pycairo" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5c/70/8fe83033136092da1babf46222964980de564bb0893fce73ed8e42b71e49/materialshapes-0.3.tar.gz", hash = "sha256:141d4ceaaf4122379eb8147805d9a87e8e11bde90b03529cbae1a1689dfe6868", size = 25433, upload-time = "2025-07-14T18:53:24.176Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/73/16/19287efc5878ec8658269bb23d456f62774bbd57ffa4cb4602b34dd1e602/materialshapes-0.3-py3-none-any.whl", hash = "sha256:2aa1ef131bc67bbd1f6a1e03efd0419cf148fd204bff69a5b41bbce09fe0e2f4", size = 29131, upload-time = "2025-07-14T18:53:22.22Z" },
+]
 
 [[package]]
 name = "materialyoucolor"
@@ -300,6 +316,22 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/f0/77/bc6f92a3e8e6e46c0ca78abfffec0037845800ea38c73483760362804c41/pillow-11.3.0-cp314-cp314t-win32.whl", hash = "sha256:118ca10c0d60b06d006be10a501fd6bbdfef559251ed31b794668ed569c87e12", size = 6377370, upload-time = "2025-07-01T09:15:46.673Z" },
     { url = "https://files.pythonhosted.org/packages/4a/82/3a721f7d69dca802befb8af08b7c79ebcab461007ce1c18bd91a5d5896f9/pillow-11.3.0-cp314-cp314t-win_amd64.whl", hash = "sha256:8924748b688aa210d79883357d102cd64690e56b923a186f35a82cbc10f997db", size = 7121500, upload-time = "2025-07-01T09:15:48.512Z" },
     { url = "https://files.pythonhosted.org/packages/89/c7/5572fa4a3f45740eaab6ae86fcdf7195b55beac1371ac8c619d880cfe948/pillow-11.3.0-cp314-cp314t-win_arm64.whl", hash = "sha256:79ea0d14d3ebad43ec77ad5272e6ff9bba5b679ef73375ea760261207fa8e0aa", size = 2512835, upload-time = "2025-07-01T09:15:50.399Z" },
+]
+
+[[package]]
+name = "pycairo"
+version = "1.28.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/40/d9/412da520de9052b7e80bfc810ec10f5cb3dbfa4aa3e23c2820dc61cdb3d0/pycairo-1.28.0.tar.gz", hash = "sha256:26ec5c6126781eb167089a123919f87baa2740da2cca9098be8b3a6b91cc5fbc", size = 662477, upload-time = "2025-04-14T20:11:08.218Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a9/d7/206d7945aac5c6c889e7fea4011410d1311455a1d8dfce66106d8d700b7f/pycairo-1.28.0-cp312-cp312-win32.whl", hash = "sha256:c00cfbb7f30eb7ca1d48886712932e2d91e8835a8496f4e423878296ceba573e", size = 750594, upload-time = "2025-04-14T20:10:53.72Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/ba/259fc9a4d3afdad1e5b9db52b9d8a5df67f70dd787167185e8ec8a1af007/pycairo-1.28.0-cp312-cp312-win_amd64.whl", hash = "sha256:d50d190f5033992b55050b9f337ee42a45c3568445d5e5d7987bab96c278d8a6", size = 841767, upload-time = "2025-04-14T20:10:56.711Z" },
+    { url = "https://files.pythonhosted.org/packages/c0/08/aa0903612ea0e8686ad6af58d4fb9cbab8ee0b0831201cddf7abd578d045/pycairo-1.28.0-cp312-cp312-win_arm64.whl", hash = "sha256:957e0340ee1c279d197d4f7cfa96f6d8b48e453eec711fca999748d752468ff4", size = 691687, upload-time = "2025-04-16T19:30:23.729Z" },
+    { url = "https://files.pythonhosted.org/packages/59/a7/c3e5ed55781dfe1b31eb4a2482aeae707671f3d36b0ea53a1722f4a3dfe9/pycairo-1.28.0-cp313-cp313-win32.whl", hash = "sha256:d13352429d8a08a1cb3607767d23d2fb32e4c4f9faa642155383980ec1478c24", size = 750594, upload-time = "2025-04-14T20:10:59.284Z" },
+    { url = "https://files.pythonhosted.org/packages/8b/1c/ebadd290748aff3b6bc35431114d41e7a42f40a4b988c2aaf2dfed5d8156/pycairo-1.28.0-cp313-cp313-win_amd64.whl", hash = "sha256:082aef6b3a9dcc328fa648d38ed6b0a31c863e903ead57dd184b2e5f86790140", size = 841774, upload-time = "2025-04-14T20:11:01.79Z" },
+    { url = "https://files.pythonhosted.org/packages/3e/ce/a3f5f1946613cd8a4654322b878c59f273c6e9b01dfadadd3f609070e0b9/pycairo-1.28.0-cp313-cp313-win_arm64.whl", hash = "sha256:026afd53b75291917a7412d9fe46dcfbaa0c028febd46ff1132d44a53ac2c8b6", size = 691675, upload-time = "2025-04-16T19:30:26.565Z" },
+    { url = "https://files.pythonhosted.org/packages/96/1b/1f5da2b2e44b33a5b269ff28af710b0a7903001d9cf8a40d00fc944a5092/pycairo-1.28.0-cp314-cp314-win32.whl", hash = "sha256:d0ab30585f536101ad6f09052fc3895e2a437ba57531ea07223d0e076248025d", size = 766699, upload-time = "2025-07-24T06:36:07.267Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/91/1d5f18bd3ed469b1de8f83bfbf8bd67d23439f075151b66740fd35356190/pycairo-1.28.0-cp314-cp314-win_amd64.whl", hash = "sha256:94f2ed204999ab95a0671a0fa948ffbb9f3d6fb8731fe787917f6d022d9c1c0f", size = 868725, upload-time = "2025-07-24T06:36:09.597Z" },
 ]
 
 [[package]]
