@@ -35,8 +35,10 @@ MDNavigationLayout:
                         text: "Поле допуск вала"
 
                     MDDropDownItem:
+                        on_release: app.open_shaft_tolerance_range_letters_menu(self)
+
                         MDDropDownItemText:
-                            id: shaft_tolerance_range_letter_text
+                            id: shaft_tolerance_range_letters_text
                             text: "Введите букву поля допуска"
 
                     MDDropDownItem:
@@ -65,7 +67,7 @@ MDNavigationLayout:
 
                     MDDropDownItem:
                         MDDropDownItemText:
-                            id: hole_tolerance_range_letter_text
+                            id: hole_tolerance_range_letters_text
                             text: "Введите букву поля допуска"
 
                     MDDropDownItem:
