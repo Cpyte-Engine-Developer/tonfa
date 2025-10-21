@@ -34,15 +34,18 @@ MDNavigationLayout:
                     MDLabel:
                         text: "Поле допуск вала"
 
-                    MDDropDownItem:
-                        on_release: app.open_shaft_tolerance_range_letters_menu(self)
+                    MDButton:
+                        style: "filled"
+                        # on_release: app.open_shaft_tolerance_range_letters_menu(self)
 
-                        MDDropDownItemText:
+                        MDButtonText:
                             id: shaft_tolerance_range_letters_text
                             text: "Введите букву поля допуска"
 
-                    MDDropDownItem:
-                        MDDropDownItemText:
+                    MDButton:
+                        style: "filled"
+
+                        MDButtonText:
                             id: shaft_tolerance_range_number_text
                             text: "Введите число поля допуска"
 
@@ -65,13 +68,17 @@ MDNavigationLayout:
                     MDLabel:
                         text: "Поле допуска отверстия"
 
-                    MDDropDownItem:
-                        MDDropDownItemText:
+                    MDButton:
+                        style: "filled"
+
+                        MDButtonText:
                             id: hole_tolerance_range_letters_text
                             text: "Введите букву поля допуска"
 
-                    MDDropDownItem:
-                        MDDropDownItemText:
+                    MDButton:
+                        style: "filled"
+
+                        MDButtonText:
                             id: hole_tolerance_range_number_text
                             text: "Введите число поля допуска"
 
