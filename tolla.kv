@@ -36,18 +36,19 @@ MDNavigationLayout:
 
                     MDButton:
                         style: "filled"
-                        # on_release: app.open_shaft_tolerance_range_letters_menu(self)
+                        on_press: app.open_shaft_tolerance_range_letters_menu()
 
                         MDButtonText:
                             id: shaft_tolerance_range_letters_text
-                            text: "Введите букву поля допуска"
+                            text: "Выберите букву поля допуска"
 
                     MDButton:
                         style: "filled"
+                        on_press: app.open_shaft_tolerance_range_numbers_menu()
 
                         MDButtonText:
                             id: shaft_tolerance_range_number_text
-                            text: "Введите число поля допуска"
+                            text: "Выберите число поля допуска"
 
                     MDLabel:
                         text: "Диаметр отверстия"
@@ -73,14 +74,14 @@ MDNavigationLayout:
 
                         MDButtonText:
                             id: hole_tolerance_range_letters_text
-                            text: "Введите букву поля допуска"
+                            text: "Выберите букву поля допуска"
 
                     MDButton:
                         style: "filled"
 
                         MDButtonText:
                             id: hole_tolerance_range_number_text
-                            text: "Введите число поля допуска"
+                            text: "Выберите число поля допуска"
 
                     MDLabel:
                         text: "Верхнее отклонение вала"
