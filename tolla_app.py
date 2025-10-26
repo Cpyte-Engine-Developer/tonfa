@@ -126,7 +126,8 @@ class TollaApp(MDApp):
                             MDListItem(
                                 MDListItemHeadlineText(text=str(number)),
                                 MDListItemTrailingCheckbox(
-                                    group="shaft tolerance range numbers"
+                                    group="shaft tolerance range numbers",
+                                    on_press=lambda _: self.change_shaft_tolerance_range_number(number)
                                 ),
                             ) for number in shaft_tolerance_range_numbers
                         )
@@ -138,6 +139,9 @@ class TollaApp(MDApp):
 
     def change_shaft_tolerance_range_letter(self, shaft_tolerance_range_letter: str) -> None: 
         self.shaft_tolerance_range_letter = shaft_tolerance_range_letter
+
+    def change_shaft_tolerance_range_number(self, shaft_tolerance_range_number: float) -> None:
+        self.shaft_tolerance_range_number = shaft_tolerance_range_number
 
     def open_hole_tolerance_range_letters_menu(self) -> None:
         tolerance_range_letters = list(string.ascii_uppercase)
@@ -235,7 +239,8 @@ class TollaApp(MDApp):
                             MDListItem(
                                 MDListItemHeadlineText(text=str(number)),
                                 MDListItemTrailingCheckbox(
-                                    group="shaft tolerance range numbers"
+                                    group="shaft tolerance range numbers",
+                                    on_press=lambda _: self.change_shaft_tolerance_range_number(number)
                                 ),
                             ) for number in hole_tolerance_range_numbers
                         )
@@ -247,4 +252,7 @@ class TollaApp(MDApp):
 
     def change_hole_tolerance_range_letter(self, hole_tolerance_range_letter: str) -> None:
         self.hole_tolerance_range_letter = hole_tolerance_range_letter
+
+    def change_hole_tolerance_range_number(self, hole_tolerance_range_number: float) -> None:
+        self.hole_tolerance_range_number = hole_tolerance_range_number
 
