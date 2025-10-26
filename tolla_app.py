@@ -57,7 +57,7 @@ class TollaApp(MDApp):
             MDDialogButtonContainer(
                 MDWidget(),
                 MDButton(
-                    MDButtonText(text="Close"),
+                    MDButtonText(text="Закрыть"),
                     style="text",
                     on_press=lambda _: dialog.dismiss(),
                 ),
@@ -172,7 +172,7 @@ class TollaApp(MDApp):
             MDDialogButtonContainer(
                 MDWidget(),
                 MDButton(
-                    MDButtonText(text="Close"),
+                    MDButtonText(text="Закрыть"),
                     style="text",
                     on_press=lambda _: dialog.dismiss(),
                 ),
