@@ -137,10 +137,12 @@ class TollaApp(MDApp):
         else:
             logging.error("Incorrect shaft tolerance range")
 
-    def change_shaft_tolerance_range_letter(self, shaft_tolerance_range_letter: str) -> None: 
+    def change_shaft_tolerance_range_letter(self, 
+            shaft_tolerance_range_letter: str) -> None: 
         self.shaft_tolerance_range_letter = shaft_tolerance_range_letter
 
-    def change_shaft_tolerance_range_number(self, shaft_tolerance_range_number: float) -> None:
+    def change_shaft_tolerance_range_number(self, 
+            shaft_tolerance_range_number: float) -> None:
         self.shaft_tolerance_range_number = shaft_tolerance_range_number
 
     def open_hole_tolerance_range_letters_menu(self) -> None:
@@ -250,9 +252,11 @@ class TollaApp(MDApp):
         else:
             logging.error("Incorrect hole tolerance range")
 
-    def change_hole_tolerance_range_letter(self, hole_tolerance_range_letter: str) -> None:
+    def change_hole_tolerance_range_letter(self, 
+            hole_tolerance_range_letter: str) -> None:
         self.hole_tolerance_range_letter = hole_tolerance_range_letter
 
-    def change_hole_tolerance_range_number(self, hole_tolerance_range_number: float) -> None:
+    def change_hole_tolerance_range_number(self, 
+            hole_tolerance_range_number: float) -> None:
         self.hole_tolerance_range_number = hole_tolerance_range_number
 
