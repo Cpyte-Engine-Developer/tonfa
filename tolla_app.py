@@ -122,7 +122,7 @@ class TollaApp(MDApp):
                     MDList(
                         *(
                             MDListItem(
-                                MDListItemHeadlineText(text=number),
+                                MDListItemHeadlineText(text=str(number)),
                                 MDListItemTrailingCheckbox(
                                     group="shaft tolerance range numbers"
                                 ),
