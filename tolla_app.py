@@ -1,34 +1,36 @@
-import string
 import logging
+import string
 
+from kivy.properties import NumericProperty, StringProperty
 from kivymd.app import MDApp
+from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import (
-    MDDialog, 
-    MDDialogButtonContainer, 
+    MDDialog,
+    MDDialogButtonContainer,
+    MDDialogContentContainer,
     MDDialogHeadlineText,
-    MDDialogContentContainer
+)
+from kivymd.uix.list import (
+    MDList,
+    MDListItem,
+    MDListItemHeadlineText,
+    MDListItemTrailingCheckbox,
 )
 from kivymd.uix.widget import MDWidget
-from kivymd.uix.list import (
-    MDList, 
-    MDListItem, 
-    MDListItemHeadlineText,
-    MDListItemTrailingCheckbox
-)
-from kivymd.uix.button import MDButton, MDButtonText
-from kivy.properties import NumericProperty, StringProperty
 
 
 class TollaApp(MDApp):
     shaft_tolerance_range_letter = StringProperty()
     shaft_tolerance_range_number = NumericProperty()
+    hole_tolerance_range_letter = StringProperty()
+    hole_tolerance_range_number = NumericProperty()
 
     def build(self) -> None:
         super().build()
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Ghostwhite"
 
-    def open_shaft_tolerance_range_letters_menu(self):
+    def open_shaft_tolerance_range_letters_menu(self) -> None:
         tolerance_range_letters = list(string.ascii_lowercase)
         tolerance_range_letters.remove("i")
         tolerance_range_letters.remove("l")
@@ -134,7 +136,41 @@ class TollaApp(MDApp):
         else:
             logging.error("Incorrect shaft tolerance range")
 
-    def change_shaft_tolerance_range_letter(self, 
-            shaft_tolerance_range_letter: str) -> None:
+    def change_shaft_tolerance_range_letter(self, shaft_tolerance_range_letter: str) -> None: 
         self.shaft_tolerance_range_letter = shaft_tolerance_range_letter
 
+    def open_hole_tolerance_range_letters_menu(self) -> None:
+        tolerance_range_letters = list(string.ascii_uppercase)
+        tolerance_range_letters.remove("I")
+        tolerance_range_letters.remove("L")
+        tolerance_range_letters.remove("O")
+        tolerance_range_letters.remove("Q")
+        tolerance_range_letters.remove("W")
+        tolerance_range_letters.insert(8, "JS")
+
+        dialog = MDDialog(
+            MDDialogHeadlineText(text="Выберите букву поля допуска"),
+            MDDialogContentContainer(
+                MDList(
+                    *(
+                        MDListItem(
+                            MDListItemHeadlineText(text=letter),
+                            MDListItemTrailingCheckbox(
+                                group="shaft tolerance range letters",
+                                on_press=lambda _: self.change_shaft_tolerance_range_letter(letter)
+                            ),
+                    ) for letter in tolerance_range_letters),
+                ),
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                MDWidget(),
+                MDButton(
+                    MDButtonText(text="Close"),
+                    style="text",
+                    on_press=lambda _: dialog.dismiss(),
+                ),
+            )
+        )
+
+        dialog.open()
