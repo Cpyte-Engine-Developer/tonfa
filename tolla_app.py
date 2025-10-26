@@ -157,7 +157,7 @@ class TollaApp(MDApp):
                             MDListItemHeadlineText(text=letter),
                             MDListItemTrailingCheckbox(
                                 group="shaft tolerance range letters",
-                                on_press=lambda _: self.change_shaft_tolerance_range_letter(letter)
+                                on_press=lambda _: self.change_hole_tolerance_range_letter(letter)
                             ),
                     ) for letter in tolerance_range_letters),
                 ),
@@ -174,3 +174,77 @@ class TollaApp(MDApp):
         )
 
         dialog.open()
+
+    def open_hole_tolerance_range_numbers_menu(self):
+        hole_tolerance_range_numbers = None
+
+        match self.hole_tolerance_range_letter:
+            case "A":
+                hole_tolerance_range_numbers = range(9, 14)
+            case "B":
+                hole_tolerance_range_numbers = range(8, 14)
+            case "C":
+                hole_tolerance_range_numbers = range(8, 13)
+            case "D":
+                hole_tolerance_range_numbers = range(5, 14)
+            case "E":
+                hole_tolerance_range_numbers = range(5, 11)
+            case "F":
+                hole_tolerance_range_numbers = range(3, 11)
+            case "G":
+                hole_tolerance_range_numbers = range(3, 11)
+            case "H":
+                hole_tolerance_range_numbers = range(1, 19)
+            case "JS":
+                hole_tolerance_range_numbers = range(1, 19)
+            case "J":
+                hole_tolerance_range_numbers = range(5, 9)
+            case "K":
+                hole_tolerance_range_numbers = range(3, 14)
+            case "M":
+                hole_tolerance_range_numbers = range(3, 10)
+            case "N":
+                hole_tolerance_range_numbers = range(3, 10)
+            case "P":
+                hole_tolerance_range_numbers = range(3, 11)
+            case "R":
+                hole_tolerance_range_numbers = range(3, 11)
+            case "S":
+                hole_tolerance_range_numbers = range(3, 11)
+            case "T":
+                hole_tolerance_range_numbers = range(5, 9)
+            case "U":
+                hole_tolerance_range_numbers = range(5, 10)
+            case "V":
+                hole_tolerance_range_numbers = range(5, 9)
+            case "X":
+                hole_tolerance_range_numbers = range(5, 11)
+            case "Y":
+                hole_tolerance_range_numbers = range(6, 11)
+            case "Z":
+                hole_tolerance_range_numbers = range(6, 12)
+            case letter:
+                logging.error(f"Incorrect letter. Current letter is {letter}")
+
+        if hole_tolerance_range_numbers is not None:
+            MDDialog(
+                MDDialogHeadlineText(text="Выберите число поля допуска"),
+                MDDialogContentContainer(
+                    MDList(
+                        *(
+                            MDListItem(
+                                MDListItemHeadlineText(text=str(number)),
+                                MDListItemTrailingCheckbox(
+                                    group="shaft tolerance range numbers"
+                                ),
+                            ) for number in hole_tolerance_range_numbers
+                        )
+                    )
+                )
+            ).open()
+        else:
+            logging.error("Incorrect hole tolerance range")
+
+    def change_hole_tolerance_range_letter(self, hole_tolerance_range_letter: str) -> None:
+        self.hole_tolerance_range_letter = hole_tolerance_range_letter
+
