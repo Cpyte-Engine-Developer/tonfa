@@ -1,7 +1,8 @@
+from functools import partial
 import logging
 import string
 
-from kivy.properties import NumericProperty, StringProperty
+from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 from kivymd.app import MDApp
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.dialog import (
@@ -10,16 +11,18 @@ from kivymd.uix.dialog import (
     MDDialogContentContainer,
     MDDialogHeadlineText,
 )
+from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
 from kivymd.uix.list import (
     MDList,
     MDListItem,
     MDListItemHeadlineText,
     MDListItemTrailingCheckbox,
 )
+from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.widget import MDWidget
 
 
-class TollaApp(MDApp):
+class TonfaApp(MDApp):
     shaft_tolerance_range_letter = StringProperty()
     shaft_tolerance_range_number = NumericProperty()
     hole_tolerance_range_letter = StringProperty()
@@ -39,32 +42,21 @@ class TollaApp(MDApp):
         tolerance_range_letters.remove("w")
         tolerance_range_letters.insert(8, "js")
 
-        dialog = MDDialog(
-            MDDialogHeadlineText(text="Выберите букву поля допуска"),
-            MDDialogContentContainer(
-                MDList(
-                    *(
-                        MDListItem(
-                            MDListItemHeadlineText(text=letter),
-                            MDListItemTrailingCheckbox(
-                                group="shaft tolerance range letters",
-                                on_press=lambda _: self.change_shaft_tolerance_range_letter(letter)
-                            ),
-                    ) for letter in tolerance_range_letters),
-                ),
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                MDWidget(),
-                MDButton(
-                    MDButtonText(text="Закрыть"),
-                    style="text",
-                    on_press=lambda _: dialog.dismiss(),
-                ),
-            )
-        )
+        menu_items = ({
+            "text": letter,
+            "on_release": partial(lambda letter: self.set_shaft_tolerance_range_menu_item(letter), letter=letter)
+        } for letter in tolerance_range_letters)
 
-        dialog.open()
+        self.menu = MDDropdownMenu(
+            caller=self.root.ids.shaft_tolerance_range_letters_text_field,
+            items=menu_items,
+            position="bottom",
+        )
+        self.menu.open()
+
+    def set_shaft_tolerance_range_menu_item(self, letter: str) -> None:
+        self.root.ids.shaft_tolerance_range_letters_text_field.text = letter
+        self.menu.dismiss()
 
     def open_shaft_tolerance_range_numbers_menu(self):
         shaft_tolerance_range_numbers = None
@@ -132,7 +124,7 @@ class TollaApp(MDApp):
                             ) for number in shaft_tolerance_range_numbers
                         )
                     )
-                )
+                ),
             ).open()
         else:
             logging.error("Incorrect shaft tolerance range")
@@ -176,7 +168,7 @@ class TollaApp(MDApp):
                     style="text",
                     on_press=lambda _: dialog.dismiss(),
                 ),
-            )
+            ),
         )
 
         dialog.open()
@@ -245,9 +237,9 @@ class TollaApp(MDApp):
                                     on_press=lambda _: self.change_shaft_tolerance_range_number(number)
                                 ),
                             ) for number in hole_tolerance_range_numbers
-                        )
-                    )
-                )
+                        ),
+                    ),
+                ),
             ).open()
         else:
             logging.error("Incorrect hole tolerance range")

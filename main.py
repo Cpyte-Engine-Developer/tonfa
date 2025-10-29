@@ -1,8 +1,8 @@
-from tolla_app import TollaApp
+from tonfa_app import TonfaApp
 
 
 def main():
-    TollaApp().run()
+    TonfaApp().run()
 
 
 if __name__ == "__main__":

@@ -35,19 +35,9 @@ MDNavigationLayout:
                     MDLabel:
                         text: "Поле допуск вала"
 
-                    MDButton:
-                        on_press: app.open_shaft_tolerance_range_letters_menu()
-
-                        MDButtonText:
-                            id: shaft_tolerance_range_letters_text
-                            text: "Выберите букву поля допуска"
-
-                    MDButton:
-                        on_press: app.open_shaft_tolerance_range_numbers_menu()
-
-                        MDButtonText:
-                            id: shaft_tolerance_range_number_text
-                            text: "Выберите число поля допуска"
+                    MDTextField:
+                        MDTextFieldMaxLengthText:
+                            max_text_length: 4
 
                     MDLabel:
                         text: "Диаметр отверстия"
