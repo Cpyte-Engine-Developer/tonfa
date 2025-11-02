@@ -1,5 +1,7 @@
 MDNavigationLayout:
     MDScreenManager:
+        id: screen_manager
+
         MDScreen:
             MDScrollView:
                 MDBoxLayout:
@@ -123,12 +125,50 @@ MDNavigationLayout:
                             MDButtonText:
                                 text: "Рассчитать"
 
+        MDScreen:
+            name: "donation"
+            adaptive_height: False
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                spacing: "20dp"
+                padding: "10dp", "20dp", "10dp", "20dp" 
+                pos_hint: {"top": 1}
+
+                MDLabel:
+                    text: "BTC"
+
+                MDButton:
+                    on_press: app.copy_bitcoin_address()
+
+                    MDButtonText:
+                        text: "Copy bitcoin address"
+
+                MDLabel:
+                    text: "ETH"
+
+                MDButton:
+                    on_press: app.copy_etherium_address()
+
+                    MDButtonText:
+                        text: "Copy etherium address"
+
+                MDLabel:
+                    text: "SOL"
+
+                MDButton:
+                    on_press: app.copy_solana_address()
+
+                    MDButtonText:
+                        text: "Copy solana address"
+
     MDNavigationDrawer:
         id: nav_drawer
 
         MDNavigationDrawerMenu:
             MDNavigationDrawerItem:
-                id: donate_button
+                on_press: app.open_donation_screen()
 
                 MDNavigationDrawerItemLeadingIcon:
                     icon: "currency-usd"

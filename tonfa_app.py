@@ -2,6 +2,7 @@ import re
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
+from kivy.core.clipboard import Clipboard
 
 
 class TonfaApp(MDApp):
@@ -39,4 +40,27 @@ class TonfaApp(MDApp):
                 MDSnackbarText(text="Неправильное поле допуска отверстия")
             ).open()
 
+    def open_donation_screen(self) -> None:
+        self.root.ids.screen_manager.current = "donation"
+
+    def copy_bitcoin_address(self) -> None:
+        Clipboard.copy("bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj")
+
+        MDSnackbar(
+            MDSnackbarText(text="Адрес скопирован!")
+        ).open()
+
+    def copy_etherium_address(self) -> None:
+        Clipboard.copy("0x6dc230D8877863293E3892cB89E09432270309A0")
+        
+        MDSnackbar(
+            MDSnackbarText(text="Адрес скопирован!")
+        ).open()
+
+    def copy_solana_address(self) -> None:
+        Clipboard.copy("5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX")
+
+        MDSnackbar(
+            MDSnackbarText(text="Адрес скопирован!")
+        ).open()
 
