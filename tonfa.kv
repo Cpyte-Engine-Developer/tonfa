@@ -15,107 +15,113 @@ MDNavigationLayout:
                                 adaptive_size: True
                                 on_release: nav_drawer.set_state("toggle")
 
-                    MDLabel:
-                        text: "Диаметр вала"
+                    MDBoxLayout:
+                        adaptive_height: True
+                        orientation: "vertical"
+                        spacing: "20dp"
+                        padding: "20dp"
 
-                    MDTextField:
-                        id: shaft_diameter_text_field
-                        mode: "outlined"
-                        input_filter: "float"
+                        MDLabel:
+                            text: "Диаметр вала"
 
-                        MDTextFieldLeadingIcon:
-                            icon: "diameter-variant"
+                        MDTextField:
+                            id: shaft_diameter_text_field
+                            mode: "outlined"
+                            input_filter: "float"
 
-                        MDTextFieldHintText:
-                            text: "Введите диаметер вала в мм"
+                            MDTextFieldLeadingIcon:
+                                icon: "diameter-variant"
 
-                    MDLabel:
-                        text: "Поле допуск вала"
+                            MDTextFieldHintText:
+                                text: "Введите диаметер вала в мм"
 
-                    MDTextField:
-                        on_text_validate:
-                            app.validate_shaft_tolerance_range(self.text)
+                        MDLabel:
+                            text: "Поле допуск вала"
 
-                        MDTextFieldMaxLengthText:
-                            max_text_length: 4
+                        MDTextField:
+                            on_text_validate:
+                                app.validate_shaft_tolerance_range(self.text)
 
-                    MDLabel:
-                        text: "Диаметр отверстия"
+                            MDTextFieldMaxLengthText:
+                                max_text_length: 4
 
-                    MDTextField:
-                        id: hole_diameter_text_field
-                        mode: "outlined"
-                        input_filter: "float"
+                        MDLabel:
+                            text: "Диаметр отверстия"
 
-                        MDTextFieldLeadingIcon:
-                            icon: "diameter-variant"
+                        MDTextField:
+                            id: hole_diameter_text_field
+                            mode: "outlined"
+                            input_filter: "float"
 
-                        MDTextFieldHintText:
-                            text: "Введите диаметер отверстия в мм"
+                            MDTextFieldLeadingIcon:
+                                icon: "diameter-variant"
 
-                    MDLabel:
-                        text: "Поле допуска отверстия"
+                            MDTextFieldHintText:
+                                text: "Введите диаметер отверстия в мм"
 
-                    MDTextField:
-                        on_text_validate:
-                            app.validate_hole_tolerance_range(self.text)
+                        MDLabel:
+                            text: "Поле допуска отверстия"
 
-                        MDTextFieldMaxLengthText:
-                            max_text_length: 4
+                        MDTextField:
+                            on_text_validate:
+                                app.validate_hole_tolerance_range(self.text)
 
-                    MDLabel:
-                        text: "Верхнее отклонение вала"
+                            MDTextFieldMaxLengthText:
+                                max_text_length: 4
 
-                    MDLabel:
-                        id: upper_shaft_deflection_label
+                        MDLabel:
+                            text: "Верхнее отклонение вала"
 
-                    MDLabel:
-                        text: "Нижнее отклонение вала"
+                        MDLabel:
+                            id: upper_shaft_deflection_label
 
-                    MDLabel:
-                        id: lower_shaft_deflection_label
+                        MDLabel:
+                            text: "Нижнее отклонение вала"
 
-                    MDLabel:
-                        text: "Верхнее отклонение отверстия"
+                        MDLabel:
+                            id: lower_shaft_deflection_label
 
-                    MDLabel:
-                        id: upper_hole_deflection_label
+                        MDLabel:
+                            text: "Верхнее отклонение отверстия"
 
-                    MDLabel:
-                        text: "Нижнее отклонение отверстия"
+                        MDLabel:
+                            id: upper_hole_deflection_label
 
-                    MDLabel:
-                        id: lower_hole_deflection_label
+                        MDLabel:
+                            text: "Нижнее отклонение отверстия"
 
-                    MDLabel:
-                        text: "Максимальный гарантированный зазор"
+                        MDLabel:
+                            id: lower_hole_deflection_label
 
-                    MDLabel:
-                        id: maximum_guaranteed_clearance_label
+                        MDLabel:
+                            text: "Максимальный гарантированный зазор"
 
-                    MDLabel:
-                        text: "Минимальный гарантированный зазор"
+                        MDLabel:
+                            id: maximum_guaranteed_clearance_label
 
-                    MDLabel:
-                        id: minimum_guaranteed_clearance_label
+                        MDLabel:
+                            text: "Минимальный гарантированный зазор"
 
-                    MDLabel:
-                        text: "Посадка"
+                        MDLabel:
+                            id: minimum_guaranteed_clearance_label
 
-                    MDLabel:
-                        id: fit_label
+                        MDLabel:
+                            text: "Посадка"
 
-                    MDLabel:
-                        text: "Система посадки"
+                        MDLabel:
+                            id: fit_label
 
-                    MDLabel:
-                        id: fit_system_label
+                        MDLabel:
+                            text: "Система посадки"
 
-                    MDButton:
-                        pos_hint: {"center_x": 0.5}
+                        MDLabel:
+                            id: fit_system_label
 
-                        MDButtonText:
-                            text: "Рассчитать"
+                        MDButton:
+                            pos_hint: {"center_x": 0.5}
+
+                            MDButtonText:
+                                text: "Рассчитать"
 
     MDNavigationDrawer:
         id: nav_drawer

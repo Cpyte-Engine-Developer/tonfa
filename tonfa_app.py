@@ -1,27 +1,7 @@
-from functools import partial
-import logging
 import re
-import string
 
-from kivy.properties import NumericProperty, ObjectProperty, StringProperty
 from kivymd.app import MDApp
-from kivymd.uix.button import MDButton, MDButtonText
-from kivymd.uix.dialog import (
-    MDDialog,
-    MDDialogButtonContainer,
-    MDDialogContentContainer,
-    MDDialogHeadlineText,
-)
-from kivymd.uix.dropdownitem import MDDropDownItem, MDDropDownItemText
-from kivymd.uix.list import (
-    MDList,
-    MDListItem,
-    MDListItemHeadlineText,
-    MDListItemTrailingCheckbox,
-)
-from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
-from kivymd.uix.widget import MDWidget
 
 
 class TonfaApp(MDApp):
@@ -55,7 +35,6 @@ class TonfaApp(MDApp):
         "(Y([6-9]|10))|(Z([6-9]|1[0-1]))"
 
         if re.fullmatch(reg_exp, text) is None:
-            print(re.fullmatch(reg_exp, text))
             MDSnackbar(
                 MDSnackbarText(text="Неправильное поле допуска отверстия")
             ).open()
