@@ -3,6 +3,7 @@ import re
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from kivy.core.clipboard import Clipboard
+from kivy.metrics import dp
 
 
 class TonfaApp(MDApp):
@@ -23,7 +24,10 @@ class TonfaApp(MDApp):
         print(re.fullmatch(reg_exp, text))
         if re.fullmatch(reg_exp, text) is None:
             MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска вала")
+                MDSnackbarText(text="Неправильное поле допуска вала"),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20)
             ).open()
 
     def validate_hole_tolerance_range(self, text: str) -> None:
@@ -37,7 +41,10 @@ class TonfaApp(MDApp):
 
         if re.fullmatch(reg_exp, text) is None:
             MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска отверстия")
+                MDSnackbarText(text="Неправильное поле допуска отверстия"),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20)
             ).open()
 
     def open_donation_screen(self) -> None:
