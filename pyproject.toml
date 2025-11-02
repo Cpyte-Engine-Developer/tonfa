@@ -10,3 +10,8 @@ dependencies = [
 
 [tool.uv.sources]
 kivymd = { url = "https://github.com/kivymd/KivyMD/archive/master.zip" }
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.2",
+]

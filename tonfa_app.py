@@ -1,5 +1,6 @@
 from functools import partial
 import logging
+import re
 import string
 
 from kivy.properties import NumericProperty, ObjectProperty, StringProperty
@@ -19,6 +20,7 @@ from kivymd.uix.list import (
     MDListItemTrailingCheckbox,
 )
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from kivymd.uix.widget import MDWidget
 
 
@@ -33,6 +35,26 @@ class TonfaApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Ghostwhite"
 
+    def validate_shaft_tolerance_range(self, text_input: str) -> None:
+        # this regular expression check that text input is correct tolerance range
+        if re.fullmatch(
+                r"(a(9|1[0-3]))|(b([8-9]|1[0-3]))|(c([8-9]|1[0-2]))|"
+                r"(d([5-9]|1[0-3]))|(e([5-9]|10))|(f([3-9]|10))|(g([3-9]|10))|"
+                r"(h([1-9]|1[0-8]))|(js([1-9]|1[0-8]))|(j[5-8])|"
+                r"(k([3-9]|1[0-3]))|(m[3-9])|(n[3-9])|(p([3-9]|10]))|"
+                r"(r([3-9]|10))|(s([3-9]|10))|(t[5-8])|(u[5-9])|(v[5-8])|"
+                r"(x([5-9]|10))|(y([6-9]|10))|(z([6-9]|1[0-1]))",
+                text_input
+                ) is None:
+            MDSnackbar(
+                MDSnackbarText(text="Неправильное поле допуска вала")
+            ).open()
+        else:
+            text_input_letters = re.match(r"[a-z]|js", text_input)
+            text_input_number = re.search(r"[1-9]\d", text_input)
+
+            print(text_input_letters, text_input_number)
+
     def open_shaft_tolerance_range_letters_menu(self) -> None:
         tolerance_range_letters = list(string.ascii_lowercase)
         tolerance_range_letters.remove("i")
@@ -42,10 +64,18 @@ class TonfaApp(MDApp):
         tolerance_range_letters.remove("w")
         tolerance_range_letters.insert(8, "js")
 
-        menu_items = ({
-            "text": letter,
-            "on_release": partial(lambda letter: self.set_shaft_tolerance_range_menu_item(letter), letter=letter)
-        } for letter in tolerance_range_letters)
+        menu_items = (
+            {
+                "text": letter,
+                "on_release": partial(
+                    lambda letter: self.set_shaft_tolerance_range_menu_item(
+                        letter
+                    ),
+                    letter=letter,
+                ),
+            }
+            for letter in tolerance_range_letters
+        )
 
         self.menu = MDDropdownMenu(
             caller=self.root.ids.shaft_tolerance_range_letters_text_field,
@@ -119,9 +149,12 @@ class TonfaApp(MDApp):
                                 MDListItemHeadlineText(text=str(number)),
                                 MDListItemTrailingCheckbox(
                                     group="shaft tolerance range numbers",
-                                    on_press=lambda _: self.change_shaft_tolerance_range_number(number)
+                                    on_press=lambda _: self.change_shaft_tolerance_range_number(
+                                        number
+                                    ),
                                 ),
-                            ) for number in shaft_tolerance_range_numbers
+                            )
+                            for number in shaft_tolerance_range_numbers
                         )
                     )
                 ),
@@ -129,12 +162,14 @@ class TonfaApp(MDApp):
         else:
             logging.error("Incorrect shaft tolerance range")
 
-    def change_shaft_tolerance_range_letter(self, 
-            shaft_tolerance_range_letter: str) -> None: 
+    def change_shaft_tolerance_range_letter(
+        self, shaft_tolerance_range_letter: str
+    ) -> None:
         self.shaft_tolerance_range_letter = shaft_tolerance_range_letter
 
-    def change_shaft_tolerance_range_number(self, 
-            shaft_tolerance_range_number: float) -> None:
+    def change_shaft_tolerance_range_number(
+        self, shaft_tolerance_range_number: float
+    ) -> None:
         self.shaft_tolerance_range_number = shaft_tolerance_range_number
 
     def open_hole_tolerance_range_letters_menu(self) -> None:
@@ -155,9 +190,13 @@ class TonfaApp(MDApp):
                             MDListItemHeadlineText(text=letter),
                             MDListItemTrailingCheckbox(
                                 group="shaft tolerance range letters",
-                                on_press=lambda _: self.change_hole_tolerance_range_letter(letter)
+                                on_press=lambda _: self.change_hole_tolerance_range_letter(
+                                    letter
+                                ),
                             ),
-                    ) for letter in tolerance_range_letters),
+                        )
+                        for letter in tolerance_range_letters
+                    ),
                 ),
                 orientation="vertical",
             ),
@@ -234,9 +273,12 @@ class TonfaApp(MDApp):
                                 MDListItemHeadlineText(text=str(number)),
                                 MDListItemTrailingCheckbox(
                                     group="shaft tolerance range numbers",
-                                    on_press=lambda _: self.change_shaft_tolerance_range_number(number)
+                                    on_press=lambda _: self.change_shaft_tolerance_range_number(
+                                        number
+                                    ),
                                 ),
-                            ) for number in hole_tolerance_range_numbers
+                            )
+                            for number in hole_tolerance_range_numbers
                         ),
                     ),
                 ),
@@ -244,11 +286,12 @@ class TonfaApp(MDApp):
         else:
             logging.error("Incorrect hole tolerance range")
 
-    def change_hole_tolerance_range_letter(self, 
-            hole_tolerance_range_letter: str) -> None:
+    def change_hole_tolerance_range_letter(
+        self, hole_tolerance_range_letter: str
+    ) -> None:
         self.hole_tolerance_range_letter = hole_tolerance_range_letter
 
-    def change_hole_tolerance_range_number(self, 
-            hole_tolerance_range_number: float) -> None:
+    def change_hole_tolerance_range_number(
+        self, hole_tolerance_range_number: float
+    ) -> None:
         self.hole_tolerance_range_number = hole_tolerance_range_number
-
