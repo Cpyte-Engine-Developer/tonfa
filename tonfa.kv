@@ -3,6 +3,8 @@ MDNavigationLayout:
         id: screen_manager
 
         MDScreen:
+            name: "main"
+
             MDScrollView:
                 MDBoxLayout:
                     adaptive_height: True
@@ -181,6 +183,15 @@ MDNavigationLayout:
         id: nav_drawer
 
         MDNavigationDrawerMenu:
+            MDNavigationDrawerItem:
+                on_press: app.open_main_screen()
+
+                MDNavigationDrawerItemLeadingIcon:
+                    icon: "calculator-variant"
+
+                MDNavigationDrawerItemText:
+                    text: "Допуски и посадки"
+
             MDNavigationDrawerItem:
                 on_press: app.open_donation_screen()
 

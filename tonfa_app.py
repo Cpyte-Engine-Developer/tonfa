@@ -50,6 +50,9 @@ class TonfaApp(MDApp):
     def open_donation_screen(self) -> None:
         self.root.ids.screen_manager.current = "donation"
 
+    def open_main_screen(self) -> None:
+        self.root.ids.screen_manager.current = "main"
+
     def copy_bitcoin_address(self) -> None:
         Clipboard.copy("bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj")
 
