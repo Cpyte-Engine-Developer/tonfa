@@ -1,3 +1,4 @@
+
 MDNavigationLayout:
     MDScreenManager:
         id: screen_manager
@@ -16,6 +17,7 @@ MDNavigationLayout:
                                 do_scroll_x: False
                                 adaptive_size: True
                                 on_release: nav_drawer.set_state("toggle")
+
 
                     MDBoxLayout:
                         adaptive_height: True
@@ -132,36 +134,49 @@ MDNavigationLayout:
             MDBoxLayout:
                 orientation: "vertical"
                 adaptive_height: True
-                spacing: "20dp"
-                padding: "10dp", "20dp", "10dp", "20dp" 
                 pos_hint: {"top": 1}
 
-                MDLabel:
-                    text: "BTC"
+                MDTopAppBar:
+                    MDTopAppBarLeadingButtonContainer:
+                        MDActionTopAppBarButton:
+                            icon: "menu"
+                            do_scroll_x: False
+                            adaptive_size: True
+                            on_release: nav_drawer.set_state("toggle")
 
-                MDButton:
-                    on_press: app.copy_bitcoin_address()
 
-                    MDButtonText:
-                        text: "Copy bitcoin address"
+                MDBoxLayout:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    spacing: "20dp"
+                    padding: "10dp", "20dp", "10dp", "20dp" 
 
-                MDLabel:
-                    text: "ETH"
+                    MDLabel:
+                        text: "BTC"
 
-                MDButton:
-                    on_press: app.copy_etherium_address()
+                    MDButton:
+                        on_press: app.copy_bitcoin_address()
 
-                    MDButtonText:
-                        text: "Copy etherium address"
+                        MDButtonText:
+                            text: "Copy bitcoin address"
 
-                MDLabel:
-                    text: "SOL"
+                    MDLabel:
+                        text: "ETH"
 
-                MDButton:
-                    on_press: app.copy_solana_address()
+                    MDButton:
+                        on_press: app.copy_etherium_address()
 
-                    MDButtonText:
-                        text: "Copy solana address"
+                        MDButtonText:
+                            text: "Copy etherium address"
+
+                    MDLabel:
+                        text: "SOL"
+
+                    MDButton:
+                        on_press: app.copy_solana_address()
+
+                        MDButtonText:
+                            text: "Copy solana address"
 
     MDNavigationDrawer:
         id: nav_drawer
