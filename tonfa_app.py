@@ -28,21 +28,30 @@ class TonfaApp(MDApp):
         Clipboard.copy(BITCOIN_ADDRESS)
 
         MDSnackbar(
-            MDSnackbarText(text="Адрес скопирован!")
+            MDSnackbarText(text="Адрес скопирован!"),
+            pos=("10dp", "10dp"),
+            size_hint_x=None,
+            width=self.root.width - dp(20)
         ).open()
 
     def copy_etherium_address(self) -> None:
         Clipboard.copy(ETHERIUM_ADDRESS)
         
         MDSnackbar(
-            MDSnackbarText(text="Адрес скопирован!")
+            MDSnackbarText(text="Адрес скопирован!"),
+            pos=("10dp", "10dp"),
+            size_hint_x=None,
+            width=self.root.width - dp(20)
         ).open()
 
     def copy_solana_address(self) -> None:
         Clipboard.copy(SOLANA_ADDRESS)
 
         MDSnackbar(
-            MDSnackbarText(text="Адрес скопирован!")
+            MDSnackbarText(text="Адрес скопирован!"),
+            pos=("10dp", "10dp"),
+            size_hint_x=None,
+            width=self.root.width - dp(20)
         ).open()
 
     def fill_labels(self) -> None:
@@ -63,7 +72,10 @@ class TonfaApp(MDApp):
             shaft_tolerance_label.text = str(shaft_tolerance_range[0] - shaft_tolerance_range[1])
         except ValueError:
             MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска вала!")
+                MDSnackbarText(text="Неправильное поле допуска вала!"),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20)
             ).open()
 
             return None
@@ -109,7 +121,10 @@ class TonfaApp(MDApp):
                 fit_system_label.text = "Комбинированная посадка"
         except ValueError:
             MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска отверстия!")
+                MDSnackbarText(text="Неправильное поле допуска отверстия!"),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20)
             ).open()
 
             return None
