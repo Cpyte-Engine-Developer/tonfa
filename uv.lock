@@ -117,6 +117,15 @@ wheels = [
 ]
 
 [[package]]
+name = "isofits"
+version = "1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/0e/69/06ebb0ad427a27f9e51eba2dc7f331ea5b583a419fd8639835262d8c698f/isofits-1.0.tar.gz", hash = "sha256:86fb46ba7ebc22a640a10fdcf4ac65438a59b047beaa9174afa4ca4f62e5a58d", size = 7797, upload-time = "2024-01-07T01:03:05.458Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8f/53/ff2d11a4ccf64761bde06302e34e1c8ce334749e38618261cffabae07b48/isofits-1.0-py3-none-any.whl", hash = "sha256:bb7342de48c2421a4f75d92aa3f9821af66867be34786238a36d42c888e54762", size = 7873, upload-time = "2024-01-07T01:03:03.951Z" },
+]
+
+[[package]]
 name = "kivy"
 version = "2.3.1"
 source = { registry = "https://pypi.org/simple" }
@@ -195,7 +204,7 @@ dependencies = [
     { name = "materialyoucolor" },
     { name = "pillow" },
 ]
-sdist = { hash = "sha256:3effcc62c8466dd0a8f458791f70ad2c512c5e5e1883740d580d42e0f1dc1aac" }
+sdist = { hash = "sha256:77624bb48740f2f666cf240be27cd1ccb31af9c507fd496d2f281b789ef1cee5" }
 
 [package.metadata]
 requires-dist = [
@@ -417,6 +426,7 @@ name = "tolla"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "isofits" },
     { name = "kivymd" },
 ]
 
@@ -426,7 +436,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "kivymd", url = "https://github.com/kivymd/KivyMD/archive/master.zip" }]
+requires-dist = [
+    { name = "isofits", specifier = ">=1.0" },
+    { name = "kivymd", url = "https://github.com/kivymd/KivyMD/archive/master.zip" },
+]
 
 [package.metadata.requires-dev]
 dev = [{ name = "ruff", specifier = ">=0.14.2" }]
