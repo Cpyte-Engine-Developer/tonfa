@@ -53,13 +53,20 @@ class TonfaApp(MDApp):
         lower_shaft_deflection_label = self.root.ids.lower_shaft_deflection_label
         shaft_tolerance_label = self.root.ids.shaft_tolerance_label
 
-        shaft_tolerance_range = list(isotol("shaft", float(shaft_diameter), shaft_tolerance_range_text, "both"))
-        shaft_tolerance_range[0] = shaft_tolerance_range[0] / 1000
-        shaft_tolerance_range[1] = shaft_tolerance_range[1] / 1000
+        try:
+            shaft_tolerance_range = list(isotol("shaft", float(shaft_diameter), shaft_tolerance_range_text, "both"))
+            shaft_tolerance_range[0] = shaft_tolerance_range[0] / 1000
+            shaft_tolerance_range[1] = shaft_tolerance_range[1] / 1000
 
-        upper_shaft_deflection_label.text = str(shaft_tolerance_range[0])
-        lower_shaft_deflection_label.text = str(shaft_tolerance_range[1])
-        shaft_tolerance_label.text = str(shaft_tolerance_range[0] - shaft_tolerance_range[1])
+            upper_shaft_deflection_label.text = str(shaft_tolerance_range[0])
+            lower_shaft_deflection_label.text = str(shaft_tolerance_range[1])
+            shaft_tolerance_label.text = str(shaft_tolerance_range[0] - shaft_tolerance_range[1])
+        except ValueError:
+            MDSnackbar(
+                MDSnackbarText(text="Неправильное поле допуска вала!")
+            ).open()
+
+            return None
 
         hole_diameter = self.root.ids.hole_diameter_text_field.text
         hole_tolerance_range_text = self.root.ids.hole_tolerance_range_text_field.text
@@ -68,36 +75,42 @@ class TonfaApp(MDApp):
         lower_hole_deflection_label = self.root.ids.lower_hole_deflection_label
         hole_tolerance_label = self.root.ids.hole_tolerance_label
 
-        hole_tolerance_range = list(isotol("hole", float(hole_diameter), hole_tolerance_range_text, "both"))
-        hole_tolerance_range[0] = hole_tolerance_range[0] / 1000
-        hole_tolerance_range[1] = hole_tolerance_range[1] / 1000
+        try:
+            hole_tolerance_range = list(isotol("hole", float(hole_diameter), hole_tolerance_range_text, "both"))
+            hole_tolerance_range[0] = hole_tolerance_range[0] / 1000
+            hole_tolerance_range[1] = hole_tolerance_range[1] / 1000
 
-        upper_hole_deflection_label.text = str(hole_tolerance_range[0])
-        lower_hole_deflection_label.text = str(hole_tolerance_range[1])
-        hole_tolerance_label.text = str(hole_tolerance_range[0] - hole_tolerance_range[1])
+            upper_hole_deflection_label.text = str(hole_tolerance_range[0])
+            lower_hole_deflection_label.text = str(hole_tolerance_range[1])
+            hole_tolerance_label.text = str(hole_tolerance_range[0] - hole_tolerance_range[1])
 
-        maximum_guaranteed_clearance_label = self.root.ids.maximum_guaranteed_clearance_label
-        minimum_guaranteed_clearance_label = self.root.ids.minimum_guaranteed_clearance_label
-        fit_label = self.root.ids.fit_label 
-        fit_system_label = self.root.ids.fit_system_label
+            maximum_guaranteed_clearance_label = self.root.ids.maximum_guaranteed_clearance_label
+            minimum_guaranteed_clearance_label = self.root.ids.minimum_guaranteed_clearance_label
+            fit_label = self.root.ids.fit_label 
+            fit_system_label = self.root.ids.fit_system_label
 
-        maximum_guaranteed_clearance_label.text = str(hole_tolerance_range[0] - shaft_tolerance_range[1])
-        minimum_guaranteed_clearance_label.text = str(hole_tolerance_range[1] - shaft_tolerance_range[0])
+            maximum_guaranteed_clearance_label.text = str(hole_tolerance_range[0] - shaft_tolerance_range[1])
+            minimum_guaranteed_clearance_label.text = str(hole_tolerance_range[1] - shaft_tolerance_range[0])
 
-        if shaft_tolerance_range[1] > hole_tolerance_range[0]:
-            fit_label.text = "Натяг"
-        elif hole_tolerance_range[1] > shaft_tolerance_range[0]:
-            fit_label.text = "Зазор"
-        else:
-            fit_label.text = "Переходная посадка"
+            if shaft_tolerance_range[1] > hole_tolerance_range[0]:
+                fit_label.text = "Натяг"
+            elif hole_tolerance_range[1] > shaft_tolerance_range[0]:
+                fit_label.text = "Зазор"
+            else:
+                fit_label.text = "Переходная посадка"
 
-        if shaft_tolerance_range_text.startswith("h") and hole_tolerance_range_text.startswith("H"):
-            fit_system_label.text = "Комбинированная посадка"
-        if shaft_tolerance_range_text.startswith("h"):
-            fit_system_label.text = "Вал"
-        if hole_tolerance_range_text.startswith("H"):
-            fit_system_label.text = "Отверстие"
-        else:
-            fit_system_label.text = "Комбинированная посадка"
+            if shaft_tolerance_range_text.startswith("h") and hole_tolerance_range_text.startswith("H"):
+                fit_system_label.text = "Комбинированная посадка"
+            if shaft_tolerance_range_text.startswith("h"):
+                fit_system_label.text = "Вал"
+            if hole_tolerance_range_text.startswith("H"):
+                fit_system_label.text = "Отверстие"
+            else:
+                fit_system_label.text = "Комбинированная посадка"
+        except ValueError:
+            MDSnackbar(
+                MDSnackbarText(text="Неправильное поле допуска отверстия!")
+            ).open()
 
-        
+            return None
+
