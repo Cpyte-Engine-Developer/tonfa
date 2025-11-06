@@ -46,9 +46,6 @@ MDNavigationLayout:
                         MDTextField:
                             id: shaft_tolerance_range_text_field
 
-                            on_text_validate:
-                                app.validate_shaft_tolerance_range(self.text)
-
                             MDTextFieldMaxLengthText:
                                 max_text_length: 4
 
@@ -71,9 +68,6 @@ MDNavigationLayout:
 
                         MDTextField:
                             id: hole_tolerance_range_text_field
-
-                            on_text_validate:
-                                app.validate_hole_tolerance_range(self.text)
 
                             MDTextFieldMaxLengthText:
                                 max_text_length: 4
