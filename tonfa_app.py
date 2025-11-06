@@ -7,6 +7,11 @@ from kivy.metrics import dp
 from isofits import *
 
 
+BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
+ETHERIUM_ADDRESS = "0x6dc230D8877863293E3892cB89E09432270309A0"
+SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
+
+
 class TonfaApp(MDApp):
     def build(self) -> None:
         super().build()
@@ -20,21 +25,21 @@ class TonfaApp(MDApp):
         self.root.ids.screen_manager.current = "main"
 
     def copy_bitcoin_address(self) -> None:
-        Clipboard.copy("bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj")
+        Clipboard.copy(BITCOIN_ADDRESS)
 
         MDSnackbar(
             MDSnackbarText(text="Адрес скопирован!")
         ).open()
 
     def copy_etherium_address(self) -> None:
-        Clipboard.copy("0x6dc230D8877863293E3892cB89E09432270309A0")
+        Clipboard.copy(ETHERIUM_ADDRESS)
         
         MDSnackbar(
             MDSnackbarText(text="Адрес скопирован!")
         ).open()
 
     def copy_solana_address(self) -> None:
-        Clipboard.copy("5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX")
+        Clipboard.copy(SOLANA_ADDRESS)
 
         MDSnackbar(
             MDSnackbarText(text="Адрес скопирован!")
