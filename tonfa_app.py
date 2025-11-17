@@ -116,21 +116,9 @@ class TonfaApp(MDApp):
             shaft_tolerance_label.text = str(
                 shaft_limit_deviations[1] - shaft_limit_deviations[0]
             )
-        except TypeError:
+        except (TypeError, sqlite3.OperationalError):
             MDSnackbar(
-                MDSnackbarText(
-                    text=f"Для размера {shaft_diameter} не существует поля"
-                    + f" допуска {shaft_tolerance_range_text}"
-                ),
-                pos=("10dp", "10dp"),
-                size_hint_x=None,
-                width=self.root.width - dp(20),
-            ).open()
-
-            return None
-        except ZeroDivisionError:
-            MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска вала!"),
+                MDSnackbarText(text="Неправильное поле допуска или размер вала"),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -172,21 +160,9 @@ class TonfaApp(MDApp):
             hole_tolerance_label.text = str(
                 hole_limit_deviations[1] - hole_limit_deviations[0]
             )
-        except TypeError:
+        except (TypeError, sqlite3.OperationalError):
             MDSnackbar(
-                MDSnackbarText(
-                    text=f"Для размера {hole_diameter} не существует поля"
-                    + f" допуска {hole_tolerance_range_text}"
-                ),
-                pos=("10dp", "10dp"),
-                size_hint_x=None,
-                width=self.root.width - dp(20),
-            ).open()
-
-            return None
-        except ZeroDivisionError:
-            MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска отверстия!"),
+                MDSnackbarText(text="Неправильное поле допуска или размер отверстия"),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
