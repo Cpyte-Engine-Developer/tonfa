@@ -1,10 +1,10 @@
 import re
+import sqlite3
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
-from isofits import *
 
 
 BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
@@ -13,6 +13,31 @@ SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
 
 
 class TonfaApp(MDApp):
+    shaft_db_conn = sqlite3.connect("shaft/db/limit_deviations.db")
+    hole_db_conn = sqlite3.connect("hole/db/limit_deviations.db")
+
+    shaft_db_cur = shaft_db_conn.cursor()
+    hole_db_cur = hole_db_conn.cursor()
+
+    sql_getting_limit_deviations_code = """
+        SELECT * FROM 
+        (
+            SELECT {tolerance_range_text}
+            FROM {tolerance_range_letters}
+            WHERE {diameter} <= limit_deviation 
+            LIMIT 1
+        )
+        UNION ALL
+        SELECT * FROM (
+            SELECT {tolerance_range_text}
+            FROM {tolerance_range_letters}
+            WHERE {diameter} > limit_deviation
+            ORDER BY limit_deviation DESC
+            LIMIT 1, 1
+        )
+    """
+
+
     def build(self) -> None:
         super().build()
         self.theme_cls.theme_style = "Dark"
@@ -55,7 +80,7 @@ class TonfaApp(MDApp):
         ).open()
 
     def fill_labels(self) -> None:
-        shaft_diameter = self.root.ids.shaft_diameter_text_field.text
+        shaft_diameter = float(self.root.ids.shaft_diameter_text_field.text)
         shaft_tolerance_range_text = self.root.ids.shaft_tolerance_range_text_field.text 
 
         upper_shaft_deflection_label = self.root.ids.upper_shaft_deflection_label
@@ -63,14 +88,27 @@ class TonfaApp(MDApp):
         shaft_tolerance_label = self.root.ids.shaft_tolerance_label
 
         try:
-            shaft_tolerance_range = list(isotol("shaft", float(shaft_diameter), shaft_tolerance_range_text, "both"))
-            shaft_tolerance_range[0] = shaft_tolerance_range[0] / 1000
-            shaft_tolerance_range[1] = shaft_tolerance_range[1] / 1000
+            shaft_tolerance_range_letters = re.match(
+                r"[a-z]|js", 
+                shaft_tolerance_range_text
+            )[0]
 
-            upper_shaft_deflection_label.text = str(shaft_tolerance_range[0])
-            lower_shaft_deflection_label.text = str(shaft_tolerance_range[1])
-            shaft_tolerance_label.text = str(shaft_tolerance_range[0] - shaft_tolerance_range[1])
-        except ValueError:
+            # TODO: add checking Nones
+            shaft_limit_deviations = self.shaft_db_cur.execute(
+                self.sql_getting_limit_deviations_code.format
+                (
+                    tolerance_range_text=shaft_tolerance_range_text, 
+                    tolerance_range_letters=shaft_tolerance_range_letters,
+                    diameter=shaft_diameter,
+                )
+            ).fetchall()
+            shaft_limit_deviations = list(map(lambda x: x[0], shaft_limit_deviations))
+            shaft_limit_deviations.sort()
+
+            upper_shaft_deflection_label.text = str(shaft_limit_deviations[1])
+            lower_shaft_deflection_label.text = str(shaft_limit_deviations[0])
+            shaft_tolerance_label.text = str(shaft_limit_deviations[1] - shaft_limit_deviations[0])
+        except ZeroDivisionError:
             MDSnackbar(
                 MDSnackbarText(text="Неправильное поле допуска вала!"),
                 pos=("10dp", "10dp"),
@@ -79,8 +117,8 @@ class TonfaApp(MDApp):
             ).open()
 
             return None
-
-        hole_diameter = self.root.ids.hole_diameter_text_field.text
+        
+        hole_diameter = float(self.root.ids.hole_diameter_text_field.text)
         hole_tolerance_range_text = self.root.ids.hole_tolerance_range_text_field.text
 
         upper_hole_deflection_label = self.root.ids.upper_hole_deflection_label
@@ -88,38 +126,27 @@ class TonfaApp(MDApp):
         hole_tolerance_label = self.root.ids.hole_tolerance_label
 
         try:
-            hole_tolerance_range = list(isotol("hole", float(hole_diameter), hole_tolerance_range_text, "both"))
-            hole_tolerance_range[0] = hole_tolerance_range[0] / 1000
-            hole_tolerance_range[1] = hole_tolerance_range[1] / 1000
+            hole_tolerance_range_letters = re.match(
+                r"[A-Z]|JS",
+                hole_tolerance_range_text
+            )[0]
+        
+            # TODO: add checking Nones
+            hole_limit_deviations = self.hole_db_cur.execute(
+                self.sql_getting_limit_deviations_code.format
+                (
+                    tolerance_range_text=hole_tolerance_range_text,
+                    tolerance_range_letters=hole_tolerance_range_letters,
+                    diameter=hole_diameter,
+                )
+            ).fetchall()
+            hole_limit_deviations = list(map(lambda x: x[0], hole_limit_deviations))
+            hole_limit_deviations.sort()
 
-            upper_hole_deflection_label.text = str(hole_tolerance_range[0])
-            lower_hole_deflection_label.text = str(hole_tolerance_range[1])
-            hole_tolerance_label.text = str(hole_tolerance_range[0] - hole_tolerance_range[1])
-
-            maximum_guaranteed_clearance_label = self.root.ids.maximum_guaranteed_clearance_label
-            minimum_guaranteed_clearance_label = self.root.ids.minimum_guaranteed_clearance_label
-            fit_label = self.root.ids.fit_label 
-            fit_system_label = self.root.ids.fit_system_label
-
-            maximum_guaranteed_clearance_label.text = str(hole_tolerance_range[0] - shaft_tolerance_range[1])
-            minimum_guaranteed_clearance_label.text = str(hole_tolerance_range[1] - shaft_tolerance_range[0])
-
-            if shaft_tolerance_range[1] > hole_tolerance_range[0]:
-                fit_label.text = "Натяг"
-            elif hole_tolerance_range[1] > shaft_tolerance_range[0]:
-                fit_label.text = "Зазор"
-            else:
-                fit_label.text = "Переходная посадка"
-
-            if shaft_tolerance_range_text.startswith("h") and hole_tolerance_range_text.startswith("H"):
-                fit_system_label.text = "Комбинированная посадка"
-            if shaft_tolerance_range_text.startswith("h"):
-                fit_system_label.text = "Вал"
-            if hole_tolerance_range_text.startswith("H"):
-                fit_system_label.text = "Отверстие"
-            else:
-                fit_system_label.text = "Комбинированная посадка"
-        except ValueError:
+            upper_hole_deflection_label.text = str(hole_limit_deviations[1])
+            lower_hole_deflection_label.text = str(hole_limit_deviations[0])
+            hole_tolerance_label.text = str(hole_limit_deviations[1] - hole_limit_deviations[0])
+        except ZeroDivisionError:
             MDSnackbar(
                 MDSnackbarText(text="Неправильное поле допуска отверстия!"),
                 pos=("10dp", "10dp"),
@@ -128,4 +155,28 @@ class TonfaApp(MDApp):
             ).open()
 
             return None
+
+        maximum_guaranteed_clearance_label = self.root.ids.maximum_guaranteed_clearance_label
+        minimum_guaranteed_clearance_label = self.root.ids.minimum_guaranteed_clearance_label
+        fit_label = self.root.ids.fit_label 
+        fit_system_label = self.root.ids.fit_system_label
+
+        maximum_guaranteed_clearance_label.text = str(hole_limit_deviations[1] - shaft_limit_deviations[0])
+        minimum_guaranteed_clearance_label.text = str(hole_limit_deviations[0] - shaft_limit_deviations[1])
+
+        if shaft_limit_deviations[0] > hole_limit_deviations[1]:
+            fit_label.text = "Натяг"
+        elif shaft_limit_deviations[1] > hole_limit_deviations[0]:
+            fit_label.text = "Зазор"
+        else:
+            fit_label.text = "Переходная посадка"
+
+        if shaft_tolerance_range_text.startswith("h") and hole_tolerance_range_text.startswith("H"):
+            fit_system_label.text = "Комбинированная посадка"
+        if shaft_tolerance_range_text.startswith("h"):
+            fit_system_label.text = "Вал"
+        if hole_tolerance_range_text.startswith("H"):
+            fit_system_label.text = "Отверстие"
+        else:
+            fit_system_label.text = "Комбинированная посадка"
 
