@@ -94,6 +94,7 @@ class TonfaApp(MDApp):
             )[0]
 
             # TODO: add checking Nones
+            # TODO: values less than 0 work not correctly
             shaft_limit_deviations = self.shaft_db_cur.execute(
                 self.sql_getting_limit_deviations_code.format
                 (
@@ -104,10 +105,22 @@ class TonfaApp(MDApp):
             ).fetchall()
             shaft_limit_deviations = list(map(lambda x: x[0], shaft_limit_deviations))
             shaft_limit_deviations.sort()
+            print(shaft_limit_deviations)
 
             upper_shaft_deflection_label.text = str(shaft_limit_deviations[1])
             lower_shaft_deflection_label.text = str(shaft_limit_deviations[0])
             shaft_tolerance_label.text = str(shaft_limit_deviations[1] - shaft_limit_deviations[0])
+        except TypeError:
+            MDSnackbar(
+                MDSnackbarText(
+                    text=f"Для размера {shaft_diameter} не существует поля" +
+                    f" допуска {shaft_tolerance_range_text}"),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20)
+            ).open()
+
+            return None
         except ZeroDivisionError:
             MDSnackbar(
                 MDSnackbarText(text="Неправильное поле допуска вала!"),
@@ -132,6 +145,7 @@ class TonfaApp(MDApp):
             )[0]
         
             # TODO: add checking Nones
+            # TODO: values less than 0 work not correctly
             hole_limit_deviations = self.hole_db_cur.execute(
                 self.sql_getting_limit_deviations_code.format
                 (
@@ -142,10 +156,22 @@ class TonfaApp(MDApp):
             ).fetchall()
             hole_limit_deviations = list(map(lambda x: x[0], hole_limit_deviations))
             hole_limit_deviations.sort()
+            print(hole_limit_deviations)
 
             upper_hole_deflection_label.text = str(hole_limit_deviations[1])
             lower_hole_deflection_label.text = str(hole_limit_deviations[0])
             hole_tolerance_label.text = str(hole_limit_deviations[1] - hole_limit_deviations[0])
+        except TypeError:
+            MDSnackbar(
+                MDSnackbarText(
+                    text=f"Для размера {hole_diameter} не существует поля" +
+                    f" допуска {hole_tolerance_range_text}"),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20)
+            ).open()
+
+            return None
         except ZeroDivisionError:
             MDSnackbar(
                 MDSnackbarText(text="Неправильное поле допуска отверстия!"),
