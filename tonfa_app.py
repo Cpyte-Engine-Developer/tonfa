@@ -7,19 +7,18 @@ from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
 
 
-BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
-ETHERIUM_ADDRESS = "0x6dc230D8877863293E3892cB89E09432270309A0"
-SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
-
-
 class TonfaApp(MDApp):
+    BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
+    ETHERIUM_ADDRESS = "0x6dc230D8877863293E3892cB89E09432270309A0"
+    SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
+
     shaft_db_conn = sqlite3.connect("shaft/db/limit_deviations.db")
     hole_db_conn = sqlite3.connect("hole/db/limit_deviations.db")
 
     shaft_db_cur = shaft_db_conn.cursor()
     hole_db_cur = hole_db_conn.cursor()
 
-    sql_getting_limit_deviations_code = """
+    GETTING_LIMIT_DEVIATIONS_CODE = """
         SELECT * FROM 
         (
             SELECT {tolerance_range_text}
@@ -50,7 +49,7 @@ class TonfaApp(MDApp):
         self.root.ids.screen_manager.current = "main"
 
     def copy_bitcoin_address(self) -> None:
-        Clipboard.copy(BITCOIN_ADDRESS)
+        Clipboard.copy(self.BITCOIN_ADDRESS)
 
         MDSnackbar(
             MDSnackbarText(text="Адрес скопирован!"),
@@ -60,7 +59,7 @@ class TonfaApp(MDApp):
         ).open()
 
     def copy_etherium_address(self) -> None:
-        Clipboard.copy(ETHERIUM_ADDRESS)
+        Clipboard.copy(self.ETHERIUM_ADDRESS)
         
         MDSnackbar(
             MDSnackbarText(text="Адрес скопирован!"),
@@ -70,7 +69,7 @@ class TonfaApp(MDApp):
         ).open()
 
     def copy_solana_address(self) -> None:
-        Clipboard.copy(SOLANA_ADDRESS)
+        Clipboard.copy(self.SOLANA_ADDRESS)
 
         MDSnackbar(
             MDSnackbarText(text="Адрес скопирован!"),
@@ -96,7 +95,7 @@ class TonfaApp(MDApp):
             # TODO: add checking Nones
             # TODO: values less than 0 work not correctly
             shaft_limit_deviations = self.shaft_db_cur.execute(
-                self.sql_getting_limit_deviations_code.format
+                self.GETTING_LIMIT_DEVIATIONS_CODE.format
                 (
                     tolerance_range_text=shaft_tolerance_range_text, 
                     tolerance_range_letters=shaft_tolerance_range_letters,
@@ -147,7 +146,7 @@ class TonfaApp(MDApp):
             # TODO: add checking Nones
             # TODO: values less than 0 work not correctly
             hole_limit_deviations = self.hole_db_cur.execute(
-                self.sql_getting_limit_deviations_code.format
+                self.GETTING_LIMIT_DEVIATIONS_CODE.format
                 (
                     tolerance_range_text=hole_tolerance_range_text,
                     tolerance_range_letters=hole_tolerance_range_letters,
