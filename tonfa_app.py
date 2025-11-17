@@ -109,7 +109,6 @@ class TonfaApp(MDApp):
                 map(lambda x: x[0], shaft_limit_deviations)
             )
             shaft_limit_deviations.sort()
-            print(shaft_limit_deviations)
 
             upper_shaft_deflection_label.text = str(shaft_limit_deviations[1])
             lower_shaft_deflection_label.text = str(shaft_limit_deviations[0])
@@ -153,7 +152,6 @@ class TonfaApp(MDApp):
                 map(lambda x: x[0], hole_limit_deviations)
             )
             hole_limit_deviations.sort()
-            print(hole_limit_deviations)
 
             upper_hole_deflection_label.text = str(hole_limit_deviations[1])
             lower_hole_deflection_label.text = str(hole_limit_deviations[0])
