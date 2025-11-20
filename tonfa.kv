@@ -1,10 +1,10 @@
 MDNavigationLayout:
     MDScreenManager:
         id: screen_manager
+        md_bg_color: self.theme_cls.backgroundColor
 
         MDScreen:
             name: "main"
-            md_bg_color: self.theme_cls.backgroundColor
 
             MDScrollView:
                 MDBoxLayout:
@@ -152,7 +152,6 @@ MDNavigationLayout:
         MDScreen:
             name: "donation"
             adaptive_height: False
-            md_bg_color: self.theme_cls.backgroundColor
 
             MDBoxLayout:
                 orientation: "vertical"
@@ -202,7 +201,6 @@ MDNavigationLayout:
 
         MDScreen:
             name: "settings"
-            md_bg_color: self.theme_cls.backgroundColor
 
             MDBoxLayout:
                 orientation: "vertical"
