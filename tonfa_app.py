@@ -47,6 +47,9 @@ class TonfaApp(MDApp):
     def open_main_screen(self) -> None:
         self.root.ids.screen_manager.current = "main"
 
+    def open_settings_screen(self) -> None:
+        self.root.ids.screen_manager.current = "settings"
+
     def copy_bitcoin_address(self) -> None:
         Clipboard.copy(self.BITCOIN_ADDRESS)
 
@@ -96,8 +99,6 @@ class TonfaApp(MDApp):
                 r"[a-z]|js", shaft_tolerance_range_text
             )[0]
 
-            # TODO: add checking Nones
-            # TODO: values less than 0 work not correctly
             shaft_limit_deviations = self.shaft_db_cur.execute(
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
                     tolerance_range_text=shaft_tolerance_range_text,
@@ -139,8 +140,6 @@ class TonfaApp(MDApp):
                 r"[A-Z]|JS", hole_tolerance_range_text
             )[0]
 
-            # TODO: add checking Nones
-            # TODO: values less than 0 work not correctly
             hole_limit_deviations = self.hole_db_cur.execute(
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
                     tolerance_range_text=hole_tolerance_range_text,
@@ -201,3 +200,4 @@ class TonfaApp(MDApp):
             fit_system_label.text = "Отверстие"
         else:
             fit_system_label.text = "Комбинированная посадка"
+

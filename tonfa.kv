@@ -4,6 +4,7 @@ MDNavigationLayout:
 
         MDScreen:
             name: "main"
+            md_bg_color: self.theme_cls.backgroundColor
 
             MDScrollView:
                 MDBoxLayout:
@@ -152,6 +153,7 @@ MDNavigationLayout:
         MDScreen:
             name: "donation"
             adaptive_height: False
+            md_bg_color: self.theme_cls.backgroundColor
 
             MDBoxLayout:
                 orientation: "vertical"
@@ -166,11 +168,10 @@ MDNavigationLayout:
                             adaptive_size: True
                             on_release: nav_drawer.set_state("toggle")
 
-
                 MDBoxLayout:
                     orientation: "vertical"
                     adaptive_height: True
-                    spacing: "20dp"
+                    spacing: "30dp"
                     padding: "10dp", "20dp", "10dp", "20dp" 
 
                     MDLabel:
@@ -199,6 +200,37 @@ MDNavigationLayout:
 
                         MDButtonText:
                             text: "Скопировать solana-адрес"
+
+        MDScreen:
+            name: "settings"
+            md_bg_color: self.theme_cls.backgroundColor
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                pos_hint: {"top": 1}
+
+                MDTopAppBar:
+                    MDTopAppBarLeadingButtonContainer:
+                        MDActionTopAppBarButton:
+                            icon: "menu"
+                            do_scroll_x: False
+                            adaptive_size: True
+                            on_release: nav_drawer.set_state("toggle")
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    spacing: "30dp"
+                    padding: "10dp", "20dp", "10dp", "20dp" 
+
+                    MDBoxLayout:
+                        adaptive_height: True
+
+                        MDLabel:
+                            text: "Light theme"
+                        MDSwitch:
+                            on_active: app.theme_cls.switch_theme()
 
     MDNavigationDrawer:
         id: nav_drawer
