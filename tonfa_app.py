@@ -19,34 +19,35 @@ TRANSLATIONS["ru"].install()
 
 
 class TonfaApp(MDApp):
-    BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
-    ETHERIUM_ADDRESS = "0x6dc230D8877863293E3892cB89E09432270309A0"
-    SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
+        self.ETHERIUM_ADDRESS = "0x6dc230D8877863293E3892cB89E09432270309A0"
+        self.SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
 
+        self.shaft_db_conn = sqlite3.connect("shaft/db/limit_deviations.db")
+        self.hole_db_conn = sqlite3.connect("hole/db/limit_deviations.db")
 
-    shaft_db_conn = sqlite3.connect("shaft/db/limit_deviations.db")
-    hole_db_conn = sqlite3.connect("hole/db/limit_deviations.db")
+        self.shaft_db_cur = self.shaft_db_conn.cursor()
+        self.hole_db_cur = self.hole_db_conn.cursor()
 
-    shaft_db_cur = shaft_db_conn.cursor()
-    hole_db_cur = hole_db_conn.cursor()
-
-    GETTING_LIMIT_DEVIATIONS_CODE = """
-        SELECT * FROM 
-        (
-            SELECT {tolerance_class}
-            FROM {fundamental_deviation}
-            WHERE {diameter} <= limit_deviation 
-            LIMIT 1
-        )
-        UNION ALL
-        SELECT * FROM (
-            SELECT {tolerance_class}
-            FROM {fundamental_deviation}
-            WHERE {diameter} > limit_deviation
-            ORDER BY limit_deviation DESC
-            LIMIT 1, 1
-        )
-    """
+        self.GETTING_LIMIT_DEVIATIONS_CODE = """
+            SELECT * FROM 
+            (
+                SELECT {tolerance_class}
+                FROM {fundamental_deviation}
+                WHERE {diameter} <= limit_deviation 
+                LIMIT 1
+            )
+            UNION ALL
+            SELECT * FROM (
+                SELECT {tolerance_class}
+                FROM {fundamental_deviation}
+                WHERE {diameter} > limit_deviation
+                ORDER BY limit_deviation DESC
+                LIMIT 1, 1
+            )
+        """
 
     def build(self) -> None:
         super().build()
