@@ -81,7 +81,7 @@ class TonfaApp(MDApp):
         ).open()
 
     def fill_labels(self) -> None:
-        shaft_diameter = float(self.root.ids.shaft_diameter_text_field.text)
+        diameter = float(self.root.ids.diameter_text_field.text)
         shaft_tolerance_range_text = (
             self.root.ids.shaft_tolerance_range_text_field.text
         )
@@ -103,7 +103,7 @@ class TonfaApp(MDApp):
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
                     tolerance_range_text=shaft_tolerance_range_text,
                     tolerance_range_letters=shaft_tolerance_range_letters,
-                    diameter=shaft_diameter,
+                    diameter=diameter,
                 )
             ).fetchall()
             shaft_limit_deviations = list(
@@ -126,7 +126,6 @@ class TonfaApp(MDApp):
 
             return None
 
-        hole_diameter = float(self.root.ids.hole_diameter_text_field.text)
         hole_tolerance_range_text = (
             self.root.ids.hole_tolerance_range_text_field.text
         )
@@ -144,7 +143,7 @@ class TonfaApp(MDApp):
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
                     tolerance_range_text=hole_tolerance_range_text,
                     tolerance_range_letters=hole_tolerance_range_letters,
-                    diameter=hole_diameter,
+                    diameter=diameter,
                 )
             ).fetchall()
             hole_limit_deviations = list(
