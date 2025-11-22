@@ -2,20 +2,13 @@ import re
 import sqlite3
 import gettext
 import os
+import configparser
 from pathlib import Path
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
-
-LOCALE_DIR = Path("locale/").absolute()
-TRANSLATIONS = {lang: gettext.translation(
-    "tonfa", 
-    localedir=LOCALE_DIR,
-    languages=[lang],
-    fallback=True) for lang in os.listdir(LOCALE_DIR)}
-TRANSLATIONS["ru"].install()
 
 
 class TonfaApp(MDApp):
@@ -48,6 +41,16 @@ class TonfaApp(MDApp):
                 LIMIT 1, 1
             )
         """
+
+        self.current_lang = "ru"
+
+        self.LOCALE_DIR = Path("locale/").absolute()
+        self.TRANSLATIONS = {lang: gettext.translation(
+            "tonfa", 
+            localedir=self.LOCALE_DIR,
+            languages=[lang],
+            fallback=True) for lang in os.listdir(self.LOCALE_DIR)}
+        self.TRANSLATIONS[self.current_lang].install()
 
     def build(self) -> None:
         super().build()
@@ -213,4 +216,9 @@ class TonfaApp(MDApp):
             fit_system_label.text = _("Отверстие")
         else:
             fit_system_label.text = _("Комбинированная посадка")
+
+    def change_language(self) -> None:
+        config = configparser.ConfigParser()
+        config.read("config.ini")
+        # config["Default"]["Language"] = 
 

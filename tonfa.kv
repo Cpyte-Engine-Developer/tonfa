@@ -212,6 +212,24 @@ MDNavigationLayout:
                         MDSwitch:
                             on_active: app.theme_cls.switch_theme()
 
+                MDBoxLayout:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    spacing: "30dp"
+                    padding: "20dp"
+
+                    MDBoxLayout:
+                        adaptive_height: True
+
+                        MDLabel:
+                            text: _("Язык")
+                        MDButton:
+                            on_press: app.change_language()
+
+                            MDButtonText:
+                                text: app.current_lang
+
+
     MDNavigationDrawer:
         id: nav_drawer
 
