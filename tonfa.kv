@@ -27,7 +27,7 @@ MDNavigationLayout:
                         padding: "20dp"
 
                         MDLabel:
-                            text: "Диаметр"
+                            text: _("Диаметр")
 
                         MDTextField:
                             id: diameter_text_field
@@ -38,7 +38,7 @@ MDNavigationLayout:
                                 icon: "diameter-variant"
 
                         MDLabel:
-                            text: "Поле допуск вала"
+                            text: _("Класс допуска вала")
 
                         MDTextField:
                             id: shaft_tolerance_class_text_field
@@ -47,7 +47,7 @@ MDNavigationLayout:
                                 max_text_length: 4
 
                         MDLabel:
-                            text: "Поле допуска отверстия"
+                            text: _("Класс допуска отверстия")
 
                         MDTextField:
                             id: hole_tolerance_class_text_field
@@ -56,70 +56,70 @@ MDNavigationLayout:
                                 max_text_length: 4
 
                         MDLabel:
-                            text: "Верхнее отклонение вала"
+                            text: _("Верхнее предельное отклонение вала")
 
                         MDLabel:
                             id: es_label
                             bold: True
 
                         MDLabel:
-                            text: "Нижнее отклонение вала"
+                            text: _("Нижнее предельное отклонение вала")
 
                         MDLabel:
                             id: ei_label
                             bold: True
 
                         MDLabel:
-                            text: "Верхнее отклонение отверстия"
+                            text: _("Верхнее предельное отклонение отверстия")
 
                         MDLabel:
                             id: ES_label
                             bold: True
 
                         MDLabel:
-                            text: "Нижнее отклонение отверстия"
+                            text: _("Нижнее предельное отклонение отверстия")
 
                         MDLabel:
                             id: EI_label
                             bold: True
 
                         MDLabel:
-                            text: "Допуск вала"
+                            text: _("Допуск вала")
 
                         MDLabel:
                             id: shaft_tolerance_label
                             bold: True
 
                         MDLabel:
-                            text: "Допуск отверстия"
+                            text: _("Допуск отверстия")
 
                         MDLabel:
                             id: hole_tolerance_label
                             bold: True
 
                         MDLabel:
-                            text: "Максимальный гарантированный зазор"
+                            text: _("Максимальный гарантированный зазор")
 
                         MDLabel:
                             id: maximum_clearance_label
                             bold: True
 
                         MDLabel:
-                            text: "Минимальный гарантированный зазор"
+                            text: _("Минимальный гарантированный зазор")
 
                         MDLabel:
                             id: minimum_clearance_label
                             bold: True
 
                         MDLabel:
-                            text: "Посадка"
+                            text: _("Посадка")
 
                         MDLabel:
                             id: fit_label
                             bold: True
 
                         MDLabel:
-                            text: "Система посадки"
+                            text: _("Система посадки")
 
                         MDLabel:
                             id: fit_system_label
@@ -130,7 +130,7 @@ MDNavigationLayout:
                             on_press: app.fill_labels()
 
                             MDButtonText:
-                                text: "Рассчитать"
+                                text: _("Рассчитать")
 
         MDScreen:
             name: "donation"
@@ -162,7 +162,7 @@ MDNavigationLayout:
                         on_press: app.copy_bitcoin_address()
 
                         MDButtonText:
-                            text: "Скопировать bitcoin-адрес"
+                            text: _("Скопировать bitcoin-адрес")
 
                     MDLabel:
                         text: "ETH"
@@ -171,7 +171,7 @@ MDNavigationLayout:
                         on_press: app.copy_etherium_address()
 
                         MDButtonText:
-                            text: "Скопировать etherium-адрес"
+                            text: _("Скопировать etherium-адрес")
 
                     MDLabel:
                         text: "SOL"
@@ -180,7 +180,7 @@ MDNavigationLayout:
                         on_press: app.copy_solana_address()
 
                         MDButtonText:
-                            text: "Скопировать solana-адрес"
+                            text: _("Скопировать solana-адрес")
 
         MDScreen:
             name: "settings"
@@ -208,7 +208,7 @@ MDNavigationLayout:
                         adaptive_height: True
 
                         MDLabel:
-                            text: "Light theme"
+                            text: _("Светлая тема")
                         MDSwitch:
                             on_active: app.theme_cls.switch_theme()
 
@@ -223,7 +223,7 @@ MDNavigationLayout:
                     icon: "calculator-variant"
 
                 MDNavigationDrawerItemText:
-                    text: "Допуски и посадки"
+                    text: _("Допуски и посадки")
 
             MDNavigationDrawerItem:
                 on_press: app.open_donation_screen()
@@ -232,7 +232,7 @@ MDNavigationLayout:
                     icon: "currency-usd"
 
                 MDNavigationDrawerItemText:
-                    text: "Донат"
+                    text: _("Донат")
 
             MDNavigationDrawerItem:
                 on_press: app.open_settings_screen()
@@ -241,5 +241,5 @@ MDNavigationLayout:
                     icon: "cog"
 
                 MDNavigationDrawerItemText:
-                    text: "Настройки"
+                    text: _("Настройки")
 

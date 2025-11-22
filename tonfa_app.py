@@ -1,16 +1,28 @@
 import re
 import sqlite3
+import gettext
+import os
+from pathlib import Path
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
 
+LOCALE_DIR = Path("locale/").absolute()
+TRANSLATIONS = {lang: gettext.translation(
+    "tonfa", 
+    localedir=LOCALE_DIR,
+    languages=[lang],
+    fallback=True) for lang in os.listdir(LOCALE_DIR)}
+TRANSLATIONS["ru"].install()
+
 
 class TonfaApp(MDApp):
     BITCOIN_ADDRESS = "bc1que9qgu3d28cqhv40lq8ccr8yt80ze9h72qj6pj"
     ETHERIUM_ADDRESS = "0x6dc230D8877863293E3892cB89E09432270309A0"
     SOLANA_ADDRESS = "5yGJjHcLbVe81Aggfuuc6VGCeNVMdAsoGzeMjdFdWHKX"
+
 
     shaft_db_conn = sqlite3.connect("shaft/db/limit_deviations.db")
     hole_db_conn = sqlite3.connect("hole/db/limit_deviations.db")
@@ -38,6 +50,7 @@ class TonfaApp(MDApp):
 
     def build(self) -> None:
         super().build()
+
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Ghostwhite"
 
@@ -54,7 +67,7 @@ class TonfaApp(MDApp):
         Clipboard.copy(self.BITCOIN_ADDRESS)
 
         MDSnackbar(
-            MDSnackbarText(text="Адрес скопирован!"),
+            MDSnackbarText(text=_("Адрес скопирован!")),
             pos=("10dp", "10dp"),
             size_hint_x=None,
             width=self.root.width - dp(20),
@@ -64,7 +77,7 @@ class TonfaApp(MDApp):
         Clipboard.copy(self.ETHERIUM_ADDRESS)
 
         MDSnackbar(
-            MDSnackbarText(text="Адрес скопирован!"),
+            MDSnackbarText(text=_("Адрес скопирован!")),
             pos=("10dp", "10dp"),
             size_hint_x=None,
             width=self.root.width - dp(20),
@@ -74,7 +87,7 @@ class TonfaApp(MDApp):
         Clipboard.copy(self.SOLANA_ADDRESS)
 
         MDSnackbar(
-            MDSnackbarText(text="Адрес скопирован!"),
+            MDSnackbarText(text=_("Адрес скопирован!")),
             pos=("10dp", "10dp"),
             size_hint_x=None,
             width=self.root.width - dp(20),
@@ -118,7 +131,7 @@ class TonfaApp(MDApp):
             )
         except (TypeError, sqlite3.OperationalError):
             MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска или размер вала"),
+                MDSnackbarText(text=_("Неправильный класс допуска или диаметр вала")),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -158,7 +171,7 @@ class TonfaApp(MDApp):
             )
         except (TypeError, sqlite3.OperationalError):
             MDSnackbar(
-                MDSnackbarText(text="Неправильное поле допуска или размер отверстия"),
+                MDSnackbarText(text=_("Неправильный класс допуска или диаметр отверстия")),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -183,20 +196,20 @@ class TonfaApp(MDApp):
         )
 
         if shaft_limit_deviations[0] > hole_limit_deviations[1]:
-            fit_label.text = "Натяг"
+            fit_label.text = _("Натяг")
         elif shaft_limit_deviations[1] > hole_limit_deviations[0]:
-            fit_label.text = "Зазор"
+            fit_label.text = _("Зазор")
         else:
-            fit_label.text = "Переходная посадка"
+            fit_label.text = _("Переходная посадка")
 
         if shaft_tolerance_class.startswith(
             "h"
         ) and hole_tolerance_class.startswith("H"):
-            fit_system_label.text = "Комбинированная посадка"
+            fit_system_label.text = _("Комбинированная посадка")
         if shaft_tolerance_class.startswith("h"):
-            fit_system_label.text = "Вал"
+            fit_system_label.text = _("Вал")
         if hole_tolerance_class.startswith("H"):
-            fit_system_label.text = "Отверстие"
+            fit_system_label.text = _("Отверстие")
         else:
-            fit_system_label.text = "Комбинированная посадка"
+            fit_system_label.text = _("Комбинированная посадка")
 
