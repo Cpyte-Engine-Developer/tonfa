@@ -21,15 +21,15 @@ class TonfaApp(MDApp):
     GETTING_LIMIT_DEVIATIONS_CODE = """
         SELECT * FROM 
         (
-            SELECT {tolerance_range_text}
-            FROM {tolerance_range_letters}
+            SELECT {tolerance_class}
+            FROM {fundamental_deviation}
             WHERE {diameter} <= limit_deviation 
             LIMIT 1
         )
         UNION ALL
         SELECT * FROM (
-            SELECT {tolerance_range_text}
-            FROM {tolerance_range_letters}
+            SELECT {tolerance_class}
+            FROM {fundamental_deviation}
             WHERE {diameter} > limit_deviation
             ORDER BY limit_deviation DESC
             LIMIT 1, 1
@@ -82,27 +82,27 @@ class TonfaApp(MDApp):
 
     def fill_labels(self) -> None:
         diameter = float(self.root.ids.diameter_text_field.text)
-        shaft_tolerance_range_text = (
-            self.root.ids.shaft_tolerance_range_text_field.text
+        shaft_tolerance_class = (
+            self.root.ids.shaft_tolerance_class_text_field.text
         )
 
-        upper_shaft_deflection_label = (
-            self.root.ids.upper_shaft_deflection_label
+        es_label = (
+            self.root.ids.es_label
         )
-        lower_shaft_deflection_label = (
-            self.root.ids.lower_shaft_deflection_label
+        ei_label = (
+            self.root.ids.ei_label
         )
         shaft_tolerance_label = self.root.ids.shaft_tolerance_label
 
         try:
-            shaft_tolerance_range_letters = re.match(
-                r"[a-z]|js", shaft_tolerance_range_text
+            shaft_fundamental_deviation = re.match(
+                r"[a-z]|js", shaft_tolerance_class
             )[0]
 
             shaft_limit_deviations = self.shaft_db_cur.execute(
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
-                    tolerance_range_text=shaft_tolerance_range_text,
-                    tolerance_range_letters=shaft_tolerance_range_letters,
+                    tolerance_class=shaft_tolerance_class,
+                    fundamental_deviation=shaft_fundamental_deviation,
                     diameter=diameter,
                 )
             ).fetchall()
@@ -111,8 +111,8 @@ class TonfaApp(MDApp):
             )
             shaft_limit_deviations.sort()
 
-            upper_shaft_deflection_label.text = str(shaft_limit_deviations[1])
-            lower_shaft_deflection_label.text = str(shaft_limit_deviations[0])
+            es_label.text = str(shaft_limit_deviations[1])
+            ei_label.text = str(shaft_limit_deviations[0])
             shaft_tolerance_label.text = str(
                 shaft_limit_deviations[1] - shaft_limit_deviations[0]
             )
@@ -126,23 +126,23 @@ class TonfaApp(MDApp):
 
             return None
 
-        hole_tolerance_range_text = (
-            self.root.ids.hole_tolerance_range_text_field.text
+        hole_tolerance_class = (
+            self.root.ids.hole_tolerance_class_text_field.text
         )
 
-        upper_hole_deflection_label = self.root.ids.upper_hole_deflection_label
-        lower_hole_deflection_label = self.root.ids.lower_hole_deflection_label
+        ES_label = self.root.ids.ES_label
+        EI_label = self.root.ids.EI_label
         hole_tolerance_label = self.root.ids.hole_tolerance_label
 
         try:
-            hole_tolerance_range_letters = re.match(
-                r"[A-Z]|JS", hole_tolerance_range_text
+            hole_fundamental_deviation = re.match(
+                r"[A-Z]|JS", hole_tolerance_class
             )[0]
 
             hole_limit_deviations = self.hole_db_cur.execute(
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
-                    tolerance_range_text=hole_tolerance_range_text,
-                    tolerance_range_letters=hole_tolerance_range_letters,
+                    tolerance_class=hole_tolerance_class,
+                    fundamental_deviation=hole_fundamental_deviation,
                     diameter=diameter,
                 )
             ).fetchall()
@@ -151,8 +151,8 @@ class TonfaApp(MDApp):
             )
             hole_limit_deviations.sort()
 
-            upper_hole_deflection_label.text = str(hole_limit_deviations[1])
-            lower_hole_deflection_label.text = str(hole_limit_deviations[0])
+            ES_label.text = str(hole_limit_deviations[1])
+            EI_label.text = str(hole_limit_deviations[0])
             hole_tolerance_label.text = str(
                 hole_limit_deviations[1] - hole_limit_deviations[0]
             )
@@ -166,19 +166,19 @@ class TonfaApp(MDApp):
 
             return None
 
-        maximum_guaranteed_clearance_label = (
-            self.root.ids.maximum_guaranteed_clearance_label
+        maximum_clearance_label = (
+            self.root.ids.maximum_clearance_label
         )
-        minimum_guaranteed_clearance_label = (
-            self.root.ids.minimum_guaranteed_clearance_label
+        minimum_clearance_label = (
+            self.root.ids.minimum_clearance_label
         )
         fit_label = self.root.ids.fit_label
         fit_system_label = self.root.ids.fit_system_label
 
-        maximum_guaranteed_clearance_label.text = str(
+        maximum_clearance_label.text = str(
             hole_limit_deviations[1] - shaft_limit_deviations[0]
         )
-        minimum_guaranteed_clearance_label.text = str(
+        minimum_clearance_label.text = str(
             hole_limit_deviations[0] - shaft_limit_deviations[1]
         )
 
@@ -189,13 +189,13 @@ class TonfaApp(MDApp):
         else:
             fit_label.text = "Переходная посадка"
 
-        if shaft_tolerance_range_text.startswith(
+        if shaft_tolerance_class.startswith(
             "h"
-        ) and hole_tolerance_range_text.startswith("H"):
+        ) and hole_tolerance_class.startswith("H"):
             fit_system_label.text = "Комбинированная посадка"
-        if shaft_tolerance_range_text.startswith("h"):
+        if shaft_tolerance_class.startswith("h"):
             fit_system_label.text = "Вал"
-        if hole_tolerance_range_text.startswith("H"):
+        if hole_tolerance_class.startswith("H"):
             fit_system_label.text = "Отверстие"
         else:
             fit_system_label.text = "Комбинированная посадка"
