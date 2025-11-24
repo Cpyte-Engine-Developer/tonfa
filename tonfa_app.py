@@ -69,6 +69,9 @@ class TonfaApp(MDApp):
         }
         self.TRANSLATIONS[self.current_lang].install()
 
+    def on_start(self) -> None:
+        Config.adddefaultsection("tonfa")
+
     def build(self) -> None:
         super().build()
 
@@ -274,14 +277,16 @@ class TonfaApp(MDApp):
             self.current_lang = lang
             self.root.ids.lang_button_text.text = self.current_lang
 
-            Config.adddefaultsection("tonfa")
             Config.set("tonfa", "language", self.current_lang)
 
     def change_theme(self) -> None:
         self.theme_cls.switch_theme()
 
-        Config.adddefaultsection("tonfa")
         Config.set("tonfa", "theme", self.theme_cls.theme_style)
 
     def on_stop(self) -> None:
         Config.write()
+        
+        self.shaft_db_conn.close()
+        self.hole_db_conn.close()
+
