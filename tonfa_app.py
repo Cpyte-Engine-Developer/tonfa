@@ -273,12 +273,13 @@ class TonfaApp(MDApp):
 
             Config.adddefaultsection("tonfa")
             Config.set("tonfa", "language", self.current_lang)
-            Config.write()
 
     def change_theme(self) -> None:
         self.theme_cls.switch_theme()
 
         Config.adddefaultsection("tonfa")
         Config.set("tonfa", "theme", self.theme_cls.theme_style)
+
+    def on_stop(self) -> None:
         Config.write()
 
