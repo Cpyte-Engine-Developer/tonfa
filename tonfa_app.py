@@ -55,7 +55,7 @@ class TonfaApp(MDApp):
             )
         """
 
-        self.current_lang = "ru"
+        self.current_lang = Config.getdefault("tonfa", "lang", "ru")
 
         self.LOCALE_DIR = Path("locale/").absolute()
         self.TRANSLATIONS = {
@@ -75,7 +75,7 @@ class TonfaApp(MDApp):
     def build(self) -> None:
         super().build()
 
-        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.theme_style = Config.getdefault("tonfa", "theme", "Dark")
         self.theme_cls.primary_palette = "Ghostwhite"
 
     def open_donation_screen(self) -> None:
