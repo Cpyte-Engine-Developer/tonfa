@@ -128,6 +128,9 @@ class TonfaApp(MDApp):
         shaft_tolerance_label = self.root.ids.shaft_tolerance_label
 
         try:
+            if diameter < 0:
+                raise ValueError("Invalid diameter. Diameter must be positive number")
+
             shaft_fundamental_deviation = re.match(
                 r"[a-z]|js", shaft_tolerance_class
             )[0]
@@ -149,7 +152,7 @@ class TonfaApp(MDApp):
             shaft_tolerance_label.text = str(
                 shaft_limit_deviations[1] - shaft_limit_deviations[0]
             )
-        except (TypeError, sqlite3.OperationalError):
+        except (TypeError, sqlite3.OperationalError, ValueError):
             MDSnackbar(
                 MDSnackbarText(
                     text=_("Неправильный класс допуска или диаметр вала")
@@ -170,6 +173,9 @@ class TonfaApp(MDApp):
         hole_tolerance_label = self.root.ids.hole_tolerance_label
 
         try:
+            if diameter < 0:
+                raise ValueError("Invalid diameter. Diameter must be positive number")
+
             hole_fundamental_deviation = re.match(
                 r"[A-Z]|JS", hole_tolerance_class
             )[0]
@@ -191,7 +197,7 @@ class TonfaApp(MDApp):
             hole_tolerance_label.text = str(
                 hole_limit_deviations[1] - hole_limit_deviations[0]
             )
-        except (TypeError, sqlite3.OperationalError):
+        except (TypeError, sqlite3.OperationalError, ValueError):
             MDSnackbar(
                 MDSnackbarText(
                     text=_("Неправильный класс допуска или диаметр отверстия")
