@@ -210,8 +210,6 @@ class TonfaApp(MDApp):
             hole_tolerance_label.text = str(
                 hole_limit_deviations[1] - hole_limit_deviations[0]
             )
-
-            raise IndexError
         except (TypeError, sqlite3.OperationalError, ValueError):
             MDSnackbar(
                 MDSnackbarText(
