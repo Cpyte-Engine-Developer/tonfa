@@ -308,7 +308,7 @@ class TonfaApp(MDApp):
             self.current_lang = lang
             self.root.ids.lang_button_text.text = self.current_lang
 
-            Config.set("tonfa", "language", self.current_lang)
+            Config.set("tonfa", "lang", self.current_lang)
 
     def change_theme(self) -> None:
         self.theme_cls.switch_theme()
