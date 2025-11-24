@@ -2,13 +2,26 @@ import re
 import sqlite3
 import gettext
 import os
-import configparser
 from pathlib import Path
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
+from kivymd.uix.dialog import (
+    MDDialog, 
+    MDDialogButtonContainer, 
+    MDDialogHeadlineText, 
+    MDDialogSupportingText,
+    MDDialogContentContainer,
+)
+from kivymd.uix.button import MDButton, MDButtonText
+from kivymd.uix.list import (
+    MDListItem, 
+    MDListItemSupportingText, 
+    MDListItemTrailingCheckbox
+)
 from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
+from kivy.config import Config
 
 
 class TonfaApp(MDApp):
@@ -217,8 +230,55 @@ class TonfaApp(MDApp):
         else:
             fit_system_label.text = _("Комбинированная посадка")
 
-    def change_language(self) -> None:
-        config = configparser.ConfigParser()
-        config.read("config.ini")
-        # config["Default"]["Language"] = 
+    def choose_language(self) -> None:
+        dialog = MDDialog(
+            MDDialogHeadlineText(
+                text=_("Выберите язык"),
+            ),
+            MDDialogSupportingText(
+                text=_("Для смены языка необходимо перезапустить приложение")
+            ),
+            MDDialogContentContainer(
+                *(
+                    MDListItem(
+                        MDListItemSupportingText(
+                            text=lang,
+                        ),
+                        MDListItemTrailingCheckbox(
+                            on_active=lambda _, is_selected, lang=lang: self.change_language(lang, is_selected),
+                            group="lang",
+                        ),
+                        theme_bg_color="Custom",
+                        md_bg_color=self.theme_cls.transparentColor,
+                    ) for lang in self.TRANSLATIONS
+                ),
+                orientation="vertical"
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(
+                        text=_("OK"),
+                    ),
+                    style="text",
+                    on_press=lambda _: dialog.dismiss(),
+                ),
+            ),
+        )
+        dialog.open()
+
+    def change_language(self, lang: str, is_selected: bool) -> None:
+        if is_selected:
+            self.current_lang = lang
+            self.root.ids.lang_button_text.text = self.current_lang
+
+            Config.adddefaultsection("tonfa")
+            Config.set("tonfa", "language", self.current_lang)
+            Config.write()
+
+    def change_theme(self) -> None:
+        self.theme_cls.switch_theme()
+
+        Config.adddefaultsection("tonfa")
+        Config.set("tonfa", "theme", self.theme_cls.theme_style)
+        Config.write()
 
