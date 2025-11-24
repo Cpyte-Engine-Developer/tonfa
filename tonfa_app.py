@@ -22,6 +22,7 @@ from kivymd.uix.list import (
 from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
 from kivy.config import Config
+from kivy.logger import Logger
 
 
 class TonfaApp(MDApp):
@@ -163,6 +164,18 @@ class TonfaApp(MDApp):
             ).open()
 
             return None
+        except Exception as e:
+            MDSnackbar(
+                MDSnackbarText(
+                    text=_("Произошла непредвиденная ошибка при расчете характеристик вала")
+                ),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20),
+            ).open()
+            Logger.exception(e)
+
+            return None
 
         hole_tolerance_class = (
             self.root.ids.hole_tolerance_class_text_field.text
@@ -197,6 +210,8 @@ class TonfaApp(MDApp):
             hole_tolerance_label.text = str(
                 hole_limit_deviations[1] - hole_limit_deviations[0]
             )
+
+            raise IndexError
         except (TypeError, sqlite3.OperationalError, ValueError):
             MDSnackbar(
                 MDSnackbarText(
@@ -206,6 +221,18 @@ class TonfaApp(MDApp):
                 size_hint_x=None,
                 width=self.root.width - dp(20),
             ).open()
+
+            return None
+        except Exception as e:
+            MDSnackbar(
+                MDSnackbarText(
+                    text=_("Произошла непредвиденная ошибка при расчете характеристик отверстия")
+                ),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20),
+            ).open()
+            Logger.exception(e)
 
             return None
 
