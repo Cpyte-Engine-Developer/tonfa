@@ -7,17 +7,17 @@ from pathlib import Path
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
 from kivymd.uix.dialog import (
-    MDDialog, 
-    MDDialogButtonContainer, 
-    MDDialogHeadlineText, 
+    MDDialog,
+    MDDialogButtonContainer,
+    MDDialogHeadlineText,
     MDDialogSupportingText,
     MDDialogContentContainer,
 )
 from kivymd.uix.button import MDButton, MDButtonText
 from kivymd.uix.list import (
-    MDListItem, 
-    MDListItemSupportingText, 
-    MDListItemTrailingCheckbox
+    MDListItem,
+    MDListItemSupportingText,
+    MDListItemTrailingCheckbox,
 )
 from kivy.core.clipboard import Clipboard
 from kivy.metrics import dp
@@ -58,11 +58,15 @@ class TonfaApp(MDApp):
         self.current_lang = "ru"
 
         self.LOCALE_DIR = Path("locale/").absolute()
-        self.TRANSLATIONS = {lang: gettext.translation(
-            "tonfa", 
-            localedir=self.LOCALE_DIR,
-            languages=[lang],
-            fallback=True) for lang in os.listdir(self.LOCALE_DIR)}
+        self.TRANSLATIONS = {
+            lang: gettext.translation(
+                "tonfa",
+                localedir=self.LOCALE_DIR,
+                languages=[lang],
+                fallback=True,
+            )
+            for lang in os.listdir(self.LOCALE_DIR)
+        }
         self.TRANSLATIONS[self.current_lang].install()
 
     def build(self) -> None:
@@ -116,12 +120,8 @@ class TonfaApp(MDApp):
             self.root.ids.shaft_tolerance_class_text_field.text
         )
 
-        es_label = (
-            self.root.ids.es_label
-        )
-        ei_label = (
-            self.root.ids.ei_label
-        )
+        es_label = self.root.ids.es_label
+        ei_label = self.root.ids.ei_label
         shaft_tolerance_label = self.root.ids.shaft_tolerance_label
 
         try:
@@ -148,7 +148,9 @@ class TonfaApp(MDApp):
             )
         except (TypeError, sqlite3.OperationalError):
             MDSnackbar(
-                MDSnackbarText(text=_("Неправильный класс допуска или диаметр вала")),
+                MDSnackbarText(
+                    text=_("Неправильный класс допуска или диаметр вала")
+                ),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -188,7 +190,9 @@ class TonfaApp(MDApp):
             )
         except (TypeError, sqlite3.OperationalError):
             MDSnackbar(
-                MDSnackbarText(text=_("Неправильный класс допуска или диаметр отверстия")),
+                MDSnackbarText(
+                    text=_("Неправильный класс допуска или диаметр отверстия")
+                ),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -196,12 +200,8 @@ class TonfaApp(MDApp):
 
             return None
 
-        maximum_clearance_label = (
-            self.root.ids.maximum_clearance_label
-        )
-        minimum_clearance_label = (
-            self.root.ids.minimum_clearance_label
-        )
+        maximum_clearance_label = self.root.ids.maximum_clearance_label
+        minimum_clearance_label = self.root.ids.minimum_clearance_label
         fit_label = self.root.ids.fit_label
         fit_system_label = self.root.ids.fit_system_label
 
@@ -245,14 +245,17 @@ class TonfaApp(MDApp):
                             text=lang,
                         ),
                         MDListItemTrailingCheckbox(
-                            on_active=lambda _, is_selected, lang=lang: self.change_language(lang, is_selected),
+                            on_active=lambda _,
+                            is_selected,
+                            lang=lang: self.change_language(lang, is_selected),
                             group="lang",
                         ),
                         theme_bg_color="Custom",
                         md_bg_color=self.theme_cls.transparentColor,
-                    ) for lang in self.TRANSLATIONS
+                    )
+                    for lang in self.TRANSLATIONS
                 ),
-                orientation="vertical"
+                orientation="vertical",
             ),
             MDDialogButtonContainer(
                 MDButton(
@@ -282,4 +285,3 @@ class TonfaApp(MDApp):
 
     def on_stop(self) -> None:
         Config.write()
-
