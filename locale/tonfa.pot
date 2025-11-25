@@ -4,158 +4,158 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2025-11-25 13:44+0300\n"
-"PO-Revision-Date: 2025-11-25 13:52+0300\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: ru\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 3.6\n"
+
 
 #: tonfa.kv:30
 msgid "Диаметр"
-msgstr "Диаметр"
+msgstr ""
 
 #: tonfa.kv:41
 msgid "Класс допуска вала"
-msgstr "Класс допуска вала"
+msgstr ""
 
 #: tonfa.kv:50
 msgid "Класс допуска отверстия"
-msgstr "Класс допуска отверстия"
+msgstr ""
 
 #: tonfa.kv:59
 msgid "Верхнее предельное отклонение вала"
-msgstr "Верхнее предельное отклонение вала"
+msgstr ""
 
 #: tonfa.kv:66
 msgid "Нижнее предельное отклонение вала"
-msgstr "Нижнее предельное отклонение вала"
+msgstr ""
 
 #: tonfa.kv:73
 msgid "Верхнее предельное отклонение отверстия"
-msgstr "Верхнее предельное отклонение отверстия"
+msgstr ""
 
 #: tonfa.kv:80
 msgid "Нижнее предельное отклонение отверстия"
-msgstr "Нижнее предельное отклонение отверстия"
+msgstr ""
 
 #: tonfa.kv:87
 msgid "Допуск вала"
-msgstr "Допуск вала"
+msgstr ""
 
 #: tonfa.kv:94
 msgid "Допуск отверстия"
-msgstr "Допуск отверстия"
+msgstr ""
 
 #: tonfa.kv:101
 msgid "Максимальный гарантированный зазор"
-msgstr "Максимальный гарантированный зазор"
+msgstr ""
 
 #: tonfa.kv:108
 msgid "Минимальный гарантированный зазор"
-msgstr "Минимальный гарантированный зазор"
+msgstr ""
 
 #: tonfa.kv:115
 msgid "Посадка"
-msgstr "Посадка"
+msgstr ""
 
 #: tonfa.kv:122
 msgid "Система посадки"
-msgstr "Система посадки"
+msgstr ""
 
 #: tonfa.kv:133
 msgid "Рассчитать"
-msgstr "Рассчитать"
+msgstr ""
 
 #: tonfa.kv:165
 msgid "Скопировать bitcoin-адрес"
-msgstr "Скопировать bitcoin-адрес"
+msgstr ""
 
 #: tonfa.kv:174
 msgid "Скопировать etherium-адрес"
-msgstr "Скопировать etherium-адрес"
+msgstr ""
 
 #: tonfa.kv:183
 msgid "Скопировать solana-адрес"
-msgstr "Скопировать solana-адрес"
+msgstr ""
 
 #: tonfa.kv:211
 msgid "Светлая тема"
-msgstr "Светлая тема"
+msgstr ""
 
 #: tonfa.kv:225
 msgid "Язык"
-msgstr "Язык"
+msgstr ""
 
 #: tonfa.kv:246
 msgid "Допуски и посадки"
-msgstr "Допуски и посадки"
+msgstr ""
 
 #: tonfa.kv:255
 msgid "Донат"
-msgstr "Донат"
+msgstr ""
 
 #: tonfa.kv:264
 msgid "Настройки"
-msgstr "Настройки"
+msgstr ""
 
 #: tonfa_app.py:95 tonfa_app.py:105 tonfa_app.py:115
 msgid "Адрес скопирован!"
-msgstr "Адрес скопирован!"
+msgstr ""
 
 #: tonfa_app.py:159
 msgid "Неправильный класс допуска или диаметр вала"
-msgstr "Неправильный класс допуска или диаметр вала"
+msgstr ""
 
 #: tonfa_app.py:170
 msgid "Произошла непредвиденная ошибка при расчете характеристик вала"
-msgstr "Произошла непредвиденная ошибка при расчете характеристик вала"
+msgstr ""
 
 #: tonfa_app.py:216
 msgid "Неправильный класс допуска или диаметр отверстия"
-msgstr "Неправильный класс допуска или диаметр отверстия"
+msgstr ""
 
 #: tonfa_app.py:227
 msgid "Произошла непредвиденная ошибка при расчете характеристик отверстия"
-msgstr "Произошла непредвиденная ошибка при расчете характеристик отверстия"
+msgstr ""
 
 #: tonfa_app.py:250
 msgid "Натяг"
-msgstr "Натяг"
+msgstr ""
 
 #: tonfa_app.py:252
 msgid "Зазор"
-msgstr "Зазор"
+msgstr ""
 
 #: tonfa_app.py:254
 msgid "Переходная посадка"
-msgstr "Переходная посадка"
+msgstr ""
 
 #: tonfa_app.py:259 tonfa_app.py:265
 msgid "Комбинированная посадка"
-msgstr "Комбинированная посадка"
+msgstr ""
 
 #: tonfa_app.py:261
 msgid "Вал"
-msgstr "Вал"
+msgstr ""
 
 #: tonfa_app.py:263
 msgid "Отверстие"
-msgstr "Отверстие"
+msgstr ""
 
 #: tonfa_app.py:270
 msgid "Выберите язык"
-msgstr "Выберите язык"
+msgstr ""
 
 #: tonfa_app.py:273
 msgid "Для смены языка необходимо перезапустить приложение"
-msgstr "Для смены языка необходимо перезапустить приложение"
+msgstr ""
 
 #: tonfa_app.py:297
 msgid "OK"
-msgstr "OK"
+msgstr ""
+

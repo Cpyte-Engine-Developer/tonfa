@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-11-22 18:24+0300\n"
-"PO-Revision-Date: 2025-11-22 18:33+0300\n"
+"POT-Creation-Date: 2025-11-25 13:44+0300\n"
+"PO-Revision-Date: 2025-11-25 14:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -88,50 +88,74 @@ msgstr "Copy solana-address"
 msgid "Светлая тема"
 msgstr "Light theme"
 
-#: tonfa.kv:226
+#: tonfa.kv:225
+msgid "Язык"
+msgstr "Language"
+
+#: tonfa.kv:246
 msgid "Допуски и посадки"
 msgstr "Tolerances and fits"
 
-#: tonfa.kv:235
+#: tonfa.kv:255
 msgid "Донат"
 msgstr "Donate"
 
-#: tonfa.kv:244
+#: tonfa.kv:264
 msgid "Настройки"
 msgstr "Settings"
 
-#: tonfa_app.py:67 tonfa_app.py:77 tonfa_app.py:87
+#: tonfa_app.py:95 tonfa_app.py:105 tonfa_app.py:115
 msgid "Адрес скопирован!"
 msgstr "Address copied!"
 
-#: tonfa_app.py:131
+#: tonfa_app.py:159
 msgid "Неправильный класс допуска или диаметр вала"
 msgstr "Incorrect tolerance class or diameter of shaft"
 
-#: tonfa_app.py:171
+#: tonfa_app.py:170
+msgid "Произошла непредвиденная ошибка при расчете характеристик вала"
+msgstr "An unexpected error occurred while calculating the shaft characteristics."
+
+#: tonfa_app.py:216
 msgid "Неправильный класс допуска или диаметр отверстия"
 msgstr "Incorrect tolerance class or diameter of hole"
 
-#: tonfa_app.py:196
+#: tonfa_app.py:227
+msgid "Произошла непредвиденная ошибка при расчете характеристик отверстия"
+msgstr "An unexpected error occurred while calculating the shaft characteristics."
+
+#: tonfa_app.py:250
 msgid "Натяг"
 msgstr "Interference"
 
-#: tonfa_app.py:198
+#: tonfa_app.py:252
 msgid "Зазор"
 msgstr "Clearance"
 
-#: tonfa_app.py:200
+#: tonfa_app.py:254
 msgid "Переходная посадка"
 msgstr "Transition fit"
 
-#: tonfa_app.py:205 tonfa_app.py:211
+#: tonfa_app.py:259 tonfa_app.py:265
 msgid "Комбинированная посадка"
 msgstr "Transition fit"
 
-#: tonfa_app.py:207
+#: tonfa_app.py:261
 msgid "Вал"
 msgstr "Shaft"
 
-#: tonfa_app.py:209
+#: tonfa_app.py:263
 msgid "Отверстие"
 msgstr "Hole"
+
+#: tonfa_app.py:270
+msgid "Выберите язык"
+msgstr "Select a language"
+
+#: tonfa_app.py:273
+msgid "Для смены языка необходимо перезапустить приложение"
+msgstr "To change the language, you need to restart the application"
+
+#: tonfa_app.py:297
+msgid "OK"
+msgstr "OK"

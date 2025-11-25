@@ -59,6 +59,9 @@ class TonfaApp(MDApp):
         self.current_lang = Config.getdefault("tonfa", "lang", "ru")
 
         self.LOCALE_DIR = Path("locale/").absolute()
+        LANGUAGES = os.listdir(self.LOCALE_DIR)
+        LANGUAGES.remove("tonfa.pot")
+
         self.TRANSLATIONS = {
             lang: gettext.translation(
                 "tonfa",
@@ -66,7 +69,7 @@ class TonfaApp(MDApp):
                 languages=[lang],
                 fallback=True,
             )
-            for lang in os.listdir(self.LOCALE_DIR)
+            for lang in LANGUAGES
         }
         self.TRANSLATIONS[self.current_lang].install()
 
