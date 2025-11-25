@@ -43,18 +43,21 @@ class TonfaApp(MDApp):
             (
                 SELECT {tolerance_class}
                 FROM {fundamental_deviation}
-                WHERE {diameter} <= limit_deviation 
+                WHERE {diameter} <= diameter 
                 LIMIT 1
             )
             UNION ALL
             SELECT * FROM (
                 SELECT {tolerance_class}
                 FROM {fundamental_deviation}
-                WHERE {diameter} > limit_deviation
-                ORDER BY limit_deviation DESC
+                WHERE {diameter} > diameter
+                ORDER BY diameter DESC
                 LIMIT 1, 1
             )
         """
+
+        self.GETTING_MAX_DIAMETER = "SELECT MAX(diameter) from {table}"
+        self.GETTING_MIN_DIAMETER = "SELECT MIN(diameter) from {table}"
 
         self.current_lang = Config.getdefault("tonfa", "lang", "ru")
 
