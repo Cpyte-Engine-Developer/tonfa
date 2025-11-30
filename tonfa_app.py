@@ -63,7 +63,7 @@ class TonfaApp(MDApp):
 
         self.LOCALE_DIR = Path("locale/").absolute()
         LANGUAGES = os.listdir(self.LOCALE_DIR)
-        if "tonfa.pot" in LANGUAGES: 
+        if "tonfa.pot" in LANGUAGES:
             LANGUAGES.remove("tonfa.pot")
 
         self.TRANSLATIONS = {
@@ -120,7 +120,9 @@ class TonfaApp(MDApp):
     def build(self) -> None:
         super().build()
 
-        self.theme_cls.theme_style = Config.getdefault("tonfa", "theme", "Dark")
+        self.theme_cls.theme_style = Config.getdefault(
+            "tonfa", "theme", "Dark"
+        )
         self.theme_cls.primary_palette = "Ghostwhite"
 
     def open_donation_screen(self) -> None:
@@ -177,12 +179,20 @@ class TonfaApp(MDApp):
                 r"[a-z]|js", shaft_tolerance_class
             )[0]
 
-            shaft_min_diameter = int(self.shaft_db_cur.execute(
-                self.GETTING_MIN_DIAMETER.format(table=shaft_fundamental_deviation)
-            ).fetchone()[0])
-            shaft_max_diameter = int(self.shaft_db_cur.execute(
-                self.GETTING_MAX_DIAMETER.format(table=shaft_fundamental_deviation)
-            ).fetchone()[0])
+            shaft_min_diameter = int(
+                self.shaft_db_cur.execute(
+                    self.GETTING_MIN_DIAMETER.format(
+                        table=shaft_fundamental_deviation
+                    )
+                ).fetchone()[0]
+            )
+            shaft_max_diameter = int(
+                self.shaft_db_cur.execute(
+                    self.GETTING_MAX_DIAMETER.format(
+                        table=shaft_fundamental_deviation
+                    )
+                ).fetchone()[0]
+            )
 
             if diameter <= shaft_min_diameter:
                 raise ValueError("Invalid diameter. Diameter must be bigger")
@@ -221,9 +231,7 @@ class TonfaApp(MDApp):
             return None
         except Exception as e:
             MDSnackbar(
-                MDSnackbarText(
-                    text=_("Непредвиденная ошибка")
-                ),
+                MDSnackbarText(text=_("Непредвиденная ошибка")),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -245,12 +253,20 @@ class TonfaApp(MDApp):
                 r"[A-Z]|JS", hole_tolerance_class
             )[0]
 
-            hole_min_diameter = int(self.hole_db_cur.execute(
-                self.GETTING_MIN_DIAMETER.format(table=hole_fundamental_deviation)
-            ).fetchone()[0])
-            hole_max_diameter = int(self.hole_db_cur.execute(
-                self.GETTING_MAX_DIAMETER.format(table=hole_fundamental_deviation)
-            ).fetchone()[0])
+            hole_min_diameter = int(
+                self.hole_db_cur.execute(
+                    self.GETTING_MIN_DIAMETER.format(
+                        table=hole_fundamental_deviation
+                    )
+                ).fetchone()[0]
+            )
+            hole_max_diameter = int(
+                self.hole_db_cur.execute(
+                    self.GETTING_MAX_DIAMETER.format(
+                        table=hole_fundamental_deviation
+                    )
+                ).fetchone()[0]
+            )
 
             if diameter <= hole_min_diameter:
                 raise ValueError("Invalid diameter. Diameter must be bigger")
@@ -289,9 +305,7 @@ class TonfaApp(MDApp):
             return None
         except Exception as e:
             MDSnackbar(
-                MDSnackbarText(
-                    text=_("Непредвиденная ошибка")
-                ),
+                MDSnackbarText(text=_("Непредвиденная ошибка")),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
@@ -312,9 +326,14 @@ class TonfaApp(MDApp):
             hole_limit_deviations[0] - shaft_limit_deviations[1]
         )
 
+        if (
+            shaft_limit_deviations[0] > hole_limit_deviations[1]
+            and shaft_limit_deviations[1] < hole_limit_deviations[0]
+        ):
+            fit_label.text = _("Переходная посадка")
         if shaft_limit_deviations[0] > hole_limit_deviations[1]:
             fit_label.text = _("Натяг")
-        elif shaft_limit_deviations[1] > hole_limit_deviations[0]:
+        elif shaft_limit_deviations[1] < hole_limit_deviations[0]:
             fit_label.text = _("Зазор")
         else:
             fit_label.text = _("Переходная посадка")
@@ -323,9 +342,9 @@ class TonfaApp(MDApp):
             "h"
         ) and hole_tolerance_class.startswith("H"):
             fit_system_label.text = _("Комбинированная посадка")
-        if shaft_tolerance_class.startswith("h"):
+        elif shaft_tolerance_class.startswith("h"):
             fit_system_label.text = _("Вал")
-        if hole_tolerance_class.startswith("H"):
+        elif hole_tolerance_class.startswith("H"):
             fit_system_label.text = _("Отверстие")
         else:
             fit_system_label.text = _("Комбинированная посадка")
@@ -356,4 +375,3 @@ class TonfaApp(MDApp):
 
     def is_current_theme_light(self) -> bool:
         return Config.getdefault("tonfa", "theme", "Dark") == "Light"
-
