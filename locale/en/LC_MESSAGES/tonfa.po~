@@ -1,0 +1,158 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2025 ORGANIZATION
+# arman <amelikbekan0@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2025-11-29 18:29+0300\n"
+"PO-Revision-Date: 2025-11-29 18:34+0300\n"
+"Last-Translator: arman <amelikbekan0@gmail.com>\n"
+"Language-Team: English\n"
+"Language: en_EN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.6\n"
+
+#: tonfa.kv:30
+msgid "Диаметр"
+msgstr "Diameter"
+
+#: tonfa.kv:41
+msgid "Класс допуска вала"
+msgstr "Shaft tolerance class"
+
+#: tonfa.kv:50
+msgid "Класс допуска отверстия"
+msgstr "Hole tolerance class"
+
+#: tonfa.kv:59
+msgid "Верхнее предельное отклонение вала"
+msgstr "Upper limit deviation of shaft"
+
+#: tonfa.kv:66
+msgid "Нижнее предельное отклонение вала"
+msgstr "Lower limit deviation of shaft"
+
+#: tonfa.kv:73
+msgid "Верхнее предельное отклонение отверстия"
+msgstr "Upper limit deviation of hole"
+
+#: tonfa.kv:80
+msgid "Нижнее предельное отклонение отверстия"
+msgstr "Lower limit deviation of hole"
+
+#: tonfa.kv:87
+msgid "Допуск вала"
+msgstr "Shaft tolerance"
+
+#: tonfa.kv:94
+msgid "Допуск отверстия"
+msgstr "Hole tolerance"
+
+#: tonfa.kv:101
+msgid "Максимальный гарантированный зазор"
+msgstr "Maximum clearance"
+
+#: tonfa.kv:108
+msgid "Минимальный гарантированный зазор"
+msgstr "Minimum clearance"
+
+#: tonfa.kv:115
+msgid "Посадка"
+msgstr "Fit"
+
+#: tonfa.kv:122
+msgid "Система посадки"
+msgstr "Fit system"
+
+#: tonfa.kv:133
+msgid "Рассчитать"
+msgstr "Calculate"
+
+#: tonfa.kv:165
+msgid "Скопировать bitcoin-адрес"
+msgstr "Copy bitcoin-address"
+
+#: tonfa.kv:174
+msgid "Скопировать etherium-адрес"
+msgstr "Copy etherium-address"
+
+#: tonfa.kv:183
+msgid "Скопировать solana-адрес"
+msgstr "Copy solana-address"
+
+#: tonfa.kv:211
+msgid "Светлая тема"
+msgstr "Light theme"
+
+#: tonfa.kv:226
+msgid "Язык"
+msgstr "Language"
+
+#: tonfa.kv:247
+msgid "Допуски и посадки"
+msgstr "Tolerances and fits"
+
+#: tonfa.kv:256
+msgid "Донат"
+msgstr "Donate"
+
+#: tonfa.kv:265
+msgid "Настройки"
+msgstr "Settings"
+
+#: tonfa_app.py:82
+msgid "Выберите язык"
+msgstr "Select a language"
+
+#: tonfa_app.py:85
+msgid "Для смены языка необходимо перезапустить приложение"
+msgstr "To change the language, you need to restart the application"
+
+#: tonfa_app.py:109
+msgid "OK"
+msgstr "OK"
+
+#: tonfa_app.py:139 tonfa_app.py:149 tonfa_app.py:159
+msgid "Адрес скопирован!"
+msgstr "Address copied!"
+
+#: tonfa_app.py:212
+msgid "Неправильный класс допуска вала или диаметр"
+msgstr "Incorrect tolerance class of shaft or diameter"
+
+#: tonfa_app.py:225 tonfa_app.py:293
+msgid "Непредвиденная ошибка"
+msgstr "Unexpected error"
+
+#: tonfa_app.py:280
+msgid "Неправильный класс допуска отверстия или диаметр"
+msgstr "Incorrect tolerance class or diameter of hole"
+
+#: tonfa_app.py:316
+msgid "Натяг"
+msgstr "Interference"
+
+#: tonfa_app.py:318
+msgid "Зазор"
+msgstr "Clearance"
+
+#: tonfa_app.py:320
+msgid "Переходная посадка"
+msgstr "Transition fit"
+
+#: tonfa_app.py:325 tonfa_app.py:331
+msgid "Комбинированная посадка"
+msgstr "Transition fit"
+
+#: tonfa_app.py:327
+msgid "Вал"
+msgstr "Shaft"
+
+#: tonfa_app.py:329
+msgid "Отверстие"
+msgstr "Hole"

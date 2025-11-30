@@ -63,7 +63,8 @@ class TonfaApp(MDApp):
 
         self.LOCALE_DIR = Path("locale/").absolute()
         LANGUAGES = os.listdir(self.LOCALE_DIR)
-        LANGUAGES.remove("tonfa.pot")
+        if "tonfa.pot" in LANGUAGES: 
+            LANGUAGES.remove("tonfa.pot")
 
         self.TRANSLATIONS = {
             lang: gettext.translation(
@@ -72,9 +73,46 @@ class TonfaApp(MDApp):
                 languages=[lang],
                 fallback=True,
             )
-            for lang in LANGUAGES
+            # for lang in LANGUAGES
         }
         self.TRANSLATIONS[self.current_lang].install()
+
+        self.lang_dialog = MDDialog(
+            MDDialogHeadlineText(
+                text=_("Выберите язык"),
+            ),
+            MDDialogSupportingText(
+                text=_("Для смены языка необходимо перезапустить приложение")
+            ),
+            MDDialogContentContainer(
+                *(
+                    MDListItem(
+                        MDListItemSupportingText(
+                            text=lang,
+                        ),
+                        MDListItemTrailingCheckbox(
+                            on_active=lambda _,
+                            is_selected,
+                            lang=lang: self.change_language(lang, is_selected),
+                            group="lang",
+                        ),
+                        theme_bg_color="Custom",
+                        md_bg_color=self.theme_cls.transparentColor,
+                    )
+                    for lang in self.TRANSLATIONS
+                ),
+                orientation="vertical",
+            ),
+            MDDialogButtonContainer(
+                MDButton(
+                    MDButtonText(
+                        text=_("OK"),
+                    ),
+                    style="text",
+                    on_press=lambda _: self.lang_dialog.dismiss(),
+                ),
+            ),
+        )
 
     def on_start(self) -> None:
         Config.adddefaultsection("tonfa")
@@ -135,12 +173,21 @@ class TonfaApp(MDApp):
         shaft_tolerance_label = self.root.ids.shaft_tolerance_label
 
         try:
-            if diameter < 0:
-                raise ValueError("Invalid diameter. Diameter must be positive number")
-
             shaft_fundamental_deviation = re.match(
                 r"[a-z]|js", shaft_tolerance_class
             )[0]
+
+            shaft_min_diameter = int(self.shaft_db_cur.execute(
+                self.GETTING_MIN_DIAMETER.format(table=shaft_fundamental_deviation)
+            ).fetchone()[0])
+            shaft_max_diameter = int(self.shaft_db_cur.execute(
+                self.GETTING_MAX_DIAMETER.format(table=shaft_fundamental_deviation)
+            ).fetchone()[0])
+
+            if diameter <= shaft_min_diameter:
+                raise ValueError("Invalid diameter. Diameter must be bigger")
+            elif diameter > shaft_max_diameter:
+                raise ValueError("Invalid diameter. Diameter must be smaller")
 
             shaft_limit_deviations = self.shaft_db_cur.execute(
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
@@ -159,21 +206,23 @@ class TonfaApp(MDApp):
             shaft_tolerance_label.text = str(
                 shaft_limit_deviations[1] - shaft_limit_deviations[0]
             )
-        except (TypeError, sqlite3.OperationalError, ValueError):
+        except (TypeError, sqlite3.OperationalError, ValueError) as e:
             MDSnackbar(
                 MDSnackbarText(
-                    text=_("Неправильный класс допуска или диаметр вала")
+                    text=_("Неправильный класс допуска вала или диаметр")
                 ),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
             ).open()
 
+            Logger.exception(e)
+
             return None
         except Exception as e:
             MDSnackbar(
                 MDSnackbarText(
-                    text=_("Произошла непредвиденная ошибка при расчете характеристик вала")
+                    text=_("Непредвиденная ошибка")
                 ),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
@@ -192,12 +241,21 @@ class TonfaApp(MDApp):
         hole_tolerance_label = self.root.ids.hole_tolerance_label
 
         try:
-            if diameter < 0:
-                raise ValueError("Invalid diameter. Diameter must be positive number")
-
             hole_fundamental_deviation = re.match(
                 r"[A-Z]|JS", hole_tolerance_class
             )[0]
+
+            hole_min_diameter = int(self.hole_db_cur.execute(
+                self.GETTING_MIN_DIAMETER.format(table=hole_fundamental_deviation)
+            ).fetchone()[0])
+            hole_max_diameter = int(self.hole_db_cur.execute(
+                self.GETTING_MAX_DIAMETER.format(table=hole_fundamental_deviation)
+            ).fetchone()[0])
+
+            if diameter <= hole_min_diameter:
+                raise ValueError("Invalid diameter. Diameter must be bigger")
+            elif diameter > hole_max_diameter:
+                raise ValueError("Invalid diameter. Diameter must be smaller")
 
             hole_limit_deviations = self.hole_db_cur.execute(
                 self.GETTING_LIMIT_DEVIATIONS_CODE.format(
@@ -216,21 +274,23 @@ class TonfaApp(MDApp):
             hole_tolerance_label.text = str(
                 hole_limit_deviations[1] - hole_limit_deviations[0]
             )
-        except (TypeError, sqlite3.OperationalError, ValueError):
+        except (TypeError, sqlite3.OperationalError, ValueError) as e:
             MDSnackbar(
                 MDSnackbarText(
-                    text=_("Неправильный класс допуска или диаметр отверстия")
+                    text=_("Неправильный класс допуска отверстия или диаметр")
                 ),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
                 width=self.root.width - dp(20),
             ).open()
 
+            Logger.exception(e)
+
             return None
         except Exception as e:
             MDSnackbar(
                 MDSnackbarText(
-                    text=_("Произошла непредвиденная ошибка при расчете характеристик отверстия")
+                    text=_("Непредвиденная ошибка")
                 ),
                 pos=("10dp", "10dp"),
                 size_hint_x=None,
@@ -271,43 +331,7 @@ class TonfaApp(MDApp):
             fit_system_label.text = _("Комбинированная посадка")
 
     def choose_language(self) -> None:
-        dialog = MDDialog(
-            MDDialogHeadlineText(
-                text=_("Выберите язык"),
-            ),
-            MDDialogSupportingText(
-                text=_("Для смены языка необходимо перезапустить приложение")
-            ),
-            MDDialogContentContainer(
-                *(
-                    MDListItem(
-                        MDListItemSupportingText(
-                            text=lang,
-                        ),
-                        MDListItemTrailingCheckbox(
-                            on_active=lambda _,
-                            is_selected,
-                            lang=lang: self.change_language(lang, is_selected),
-                            group="lang",
-                        ),
-                        theme_bg_color="Custom",
-                        md_bg_color=self.theme_cls.transparentColor,
-                    )
-                    for lang in self.TRANSLATIONS
-                ),
-                orientation="vertical",
-            ),
-            MDDialogButtonContainer(
-                MDButton(
-                    MDButtonText(
-                        text=_("OK"),
-                    ),
-                    style="text",
-                    on_press=lambda _: dialog.dismiss(),
-                ),
-            ),
-        )
-        dialog.open()
+        self.lang_dialog.open()
 
     def change_language(self, lang: str, is_selected: bool) -> None:
         if is_selected:
@@ -315,15 +339,21 @@ class TonfaApp(MDApp):
             self.root.ids.lang_button_text.text = self.current_lang
 
             Config.set("tonfa", "lang", self.current_lang)
+            Config.write()
 
     def change_theme(self) -> None:
-        self.theme_cls.switch_theme()
+        if self.theme_cls.theme_style == "Light":
+            self.theme_cls.theme_style = "Dark"
+        elif self.theme_cls.theme_style == "Dark":
+            self.theme_cls.theme_style = "Light"
 
         Config.set("tonfa", "theme", self.theme_cls.theme_style)
+        Config.write()
 
     def on_stop(self) -> None:
-        Config.write()
-        
         self.shaft_db_conn.close()
         self.hole_db_conn.close()
+
+    def is_current_theme_light(self) -> bool:
+        return Config.getdefault("tonfa", "theme", "Dark") == "Light"
 

@@ -56,28 +56,28 @@ MDNavigationLayout:
                                 max_text_length: 4
 
                         MDLabel:
-                            text: _("Верхнее предельное отклонение вала")
+                            text: _("Верхнее отклонение вала")
 
                         MDLabel:
                             id: es_label
                             bold: True
 
                         MDLabel:
-                            text: _("Нижнее предельное отклонение вала")
+                            text: _("Нижнее отклонение вала")
 
                         MDLabel:
                             id: ei_label
                             bold: True
 
                         MDLabel:
-                            text: _("Верхнее предельное отклонение отверстия")
+                            text: _("Верхнее отклонение отверстия")
 
                         MDLabel:
                             id: ES_label
                             bold: True
 
                         MDLabel:
-                            text: _("Нижнее предельное отклонение отверстия")
+                            text: _("Нижнее отклонение отверстия")
 
                         MDLabel:
                             id: EI_label
@@ -210,6 +210,7 @@ MDNavigationLayout:
                         MDLabel:
                             text: _("Светлая тема")
                         MDSwitch:
+                            active: app.is_current_theme_light()
                             on_active: app.change_theme()
 
                 MDBoxLayout:

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-11-25 13:44+0300\n"
+"POT-Creation-Date: 2025-11-29 18:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,19 +28,19 @@ msgid "Класс допуска отверстия"
 msgstr ""
 
 #: tonfa.kv:59
-msgid "Верхнее предельное отклонение вала"
+msgid "Верхнее отклонение вала"
 msgstr ""
 
 #: tonfa.kv:66
-msgid "Нижнее предельное отклонение вала"
+msgid "Нижнее отклонение вала"
 msgstr ""
 
 #: tonfa.kv:73
-msgid "Верхнее предельное отклонение отверстия"
+msgid "Верхнее отклонение отверстия"
 msgstr ""
 
 #: tonfa.kv:80
-msgid "Нижнее предельное отклонение отверстия"
+msgid "Нижнее отклонение отверстия"
 msgstr ""
 
 #: tonfa.kv:87
@@ -87,75 +87,71 @@ msgstr ""
 msgid "Светлая тема"
 msgstr ""
 
-#: tonfa.kv:225
+#: tonfa.kv:226
 msgid "Язык"
 msgstr ""
 
-#: tonfa.kv:246
+#: tonfa.kv:247
 msgid "Допуски и посадки"
 msgstr ""
 
-#: tonfa.kv:255
+#: tonfa.kv:256
 msgid "Донат"
 msgstr ""
 
-#: tonfa.kv:264
+#: tonfa.kv:265
 msgid "Настройки"
 msgstr ""
 
-#: tonfa_app.py:95 tonfa_app.py:105 tonfa_app.py:115
-msgid "Адрес скопирован!"
-msgstr ""
-
-#: tonfa_app.py:159
-msgid "Неправильный класс допуска или диаметр вала"
-msgstr ""
-
-#: tonfa_app.py:170
-msgid "Произошла непредвиденная ошибка при расчете характеристик вала"
-msgstr ""
-
-#: tonfa_app.py:216
-msgid "Неправильный класс допуска или диаметр отверстия"
-msgstr ""
-
-#: tonfa_app.py:227
-msgid "Произошла непредвиденная ошибка при расчете характеристик отверстия"
-msgstr ""
-
-#: tonfa_app.py:250
-msgid "Натяг"
-msgstr ""
-
-#: tonfa_app.py:252
-msgid "Зазор"
-msgstr ""
-
-#: tonfa_app.py:254
-msgid "Переходная посадка"
-msgstr ""
-
-#: tonfa_app.py:259 tonfa_app.py:265
-msgid "Комбинированная посадка"
-msgstr ""
-
-#: tonfa_app.py:261
-msgid "Вал"
-msgstr ""
-
-#: tonfa_app.py:263
-msgid "Отверстие"
-msgstr ""
-
-#: tonfa_app.py:270
+#: tonfa_app.py:82
 msgid "Выберите язык"
 msgstr ""
 
-#: tonfa_app.py:273
+#: tonfa_app.py:85
 msgid "Для смены языка необходимо перезапустить приложение"
 msgstr ""
 
-#: tonfa_app.py:297
+#: tonfa_app.py:109
 msgid "OK"
+msgstr ""
+
+#: tonfa_app.py:139 tonfa_app.py:149 tonfa_app.py:159
+msgid "Адрес скопирован!"
+msgstr ""
+
+#: tonfa_app.py:212
+msgid "Неправильный класс допуска вала или диаметр"
+msgstr ""
+
+#: tonfa_app.py:225 tonfa_app.py:293
+msgid "Непредвиденная ошибка"
+msgstr ""
+
+#: tonfa_app.py:280
+msgid "Неправильный класс допуска отверстия или диаметр"
+msgstr ""
+
+#: tonfa_app.py:316
+msgid "Натяг"
+msgstr ""
+
+#: tonfa_app.py:318
+msgid "Зазор"
+msgstr ""
+
+#: tonfa_app.py:320
+msgid "Переходная посадка"
+msgstr ""
+
+#: tonfa_app.py:325 tonfa_app.py:331
+msgid "Комбинированная посадка"
+msgstr ""
+
+#: tonfa_app.py:327
+msgid "Вал"
+msgstr ""
+
+#: tonfa_app.py:329
+msgid "Отверстие"
 msgstr ""
 
