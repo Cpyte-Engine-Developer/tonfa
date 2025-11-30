@@ -8,3 +8,6 @@ extend-select = [
     "B",
     "SIM",
 ]
+
+[tool.ruff]
+builtins = ["_"]
