@@ -73,7 +73,7 @@ class TonfaApp(MDApp):
                 languages=[lang],
                 fallback=True,
             )
-            # for lang in LANGUAGES
+            for lang in LANGUAGES
         }
         self.TRANSLATIONS[self.current_lang].install()
 
