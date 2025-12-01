@@ -6,7 +6,7 @@ dist/
 wheels/
 *.egg-info
 .buildozer/
-bin/
+bin/*
 
 # Virtual environments
 .venv
