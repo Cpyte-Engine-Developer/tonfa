@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-11-29 18:40+0300\n"
+"POT-Creation-Date: 2025-12-02 20:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,143 +15,155 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: tonfa.kv:30
+#: tonfa.kv:33
 msgid "Диаметр"
 msgstr ""
 
-#: tonfa.kv:41
+#: tonfa.kv:44
 msgid "Класс допуска вала"
 msgstr ""
 
-#: tonfa.kv:50
+#: tonfa.kv:53
 msgid "Класс допуска отверстия"
 msgstr ""
 
-#: tonfa.kv:59
+#: tonfa.kv:62
 msgid "Верхнее отклонение вала"
 msgstr ""
 
-#: tonfa.kv:66
+#: tonfa.kv:69
 msgid "Нижнее отклонение вала"
 msgstr ""
 
-#: tonfa.kv:73
+#: tonfa.kv:76
 msgid "Верхнее отклонение отверстия"
 msgstr ""
 
-#: tonfa.kv:80
+#: tonfa.kv:83
 msgid "Нижнее отклонение отверстия"
 msgstr ""
 
-#: tonfa.kv:87
+#: tonfa.kv:90
 msgid "Допуск вала"
 msgstr ""
 
-#: tonfa.kv:94
+#: tonfa.kv:97
 msgid "Допуск отверстия"
 msgstr ""
 
-#: tonfa.kv:101
+#: tonfa.kv:104
 msgid "Максимальный гарантированный зазор"
 msgstr ""
 
-#: tonfa.kv:108
+#: tonfa.kv:111
 msgid "Минимальный гарантированный зазор"
 msgstr ""
 
-#: tonfa.kv:115
+#: tonfa.kv:118
 msgid "Посадка"
 msgstr ""
 
-#: tonfa.kv:122
+#: tonfa.kv:125
 msgid "Система посадки"
 msgstr ""
 
-#: tonfa.kv:133
+#: tonfa.kv:136
 msgid "Рассчитать"
 msgstr ""
 
-#: tonfa.kv:165
+#: tonfa.kv:168
 msgid "Скопировать bitcoin-адрес"
 msgstr ""
 
-#: tonfa.kv:174
+#: tonfa.kv:177
 msgid "Скопировать etherium-адрес"
 msgstr ""
 
-#: tonfa.kv:183
+#: tonfa.kv:186
 msgid "Скопировать solana-адрес"
 msgstr ""
 
-#: tonfa.kv:211
+#: tonfa.kv:214
 msgid "Светлая тема"
 msgstr ""
 
-#: tonfa.kv:226
+#: tonfa.kv:229
 msgid "Язык"
 msgstr ""
 
-#: tonfa.kv:247
+#: tonfa.kv:250
 msgid "Допуски и посадки"
 msgstr ""
 
-#: tonfa.kv:256
+#: tonfa.kv:259
 msgid "Донат"
 msgstr ""
 
-#: tonfa.kv:265
+#: tonfa.kv:268
 msgid "Настройки"
 msgstr ""
 
-#: tonfa_app.py:82
+#: tonfa_app.py:83
 msgid "Выберите язык"
 msgstr ""
 
-#: tonfa_app.py:85
+#: tonfa_app.py:86
 msgid "Для смены языка необходимо перезапустить приложение"
 msgstr ""
 
-#: tonfa_app.py:109
+#: tonfa_app.py:110
 msgid "OK"
 msgstr ""
 
-#: tonfa_app.py:139 tonfa_app.py:149 tonfa_app.py:159
+#: tonfa_app.py:143 tonfa_app.py:154 tonfa_app.py:165
 msgid "Адрес скопирован!"
 msgstr ""
 
-#: tonfa_app.py:212
+#: tonfa_app.py:175
+msgid "Не указан диаметр"
+msgstr ""
+
+#: tonfa_app.py:188
+msgid "Не указан класс допуска вала"
+msgstr ""
+
+#: tonfa_app.py:245
 msgid "Неправильный класс допуска вала или диаметр"
 msgstr ""
 
-#: tonfa_app.py:225 tonfa_app.py:293
+#: tonfa_app.py:257 tonfa_app.py:338
 msgid "Непредвиденная ошибка"
 msgstr ""
 
-#: tonfa_app.py:280
+#: tonfa_app.py:271
+msgid "Не указан класс допуска отверстия"
+msgstr ""
+
+#: tonfa_app.py:326
 msgid "Неправильный класс допуска отверстия или диаметр"
 msgstr ""
 
-#: tonfa_app.py:316
-msgid "Натяг"
-msgstr ""
-
-#: tonfa_app.py:318
-msgid "Зазор"
-msgstr ""
-
-#: tonfa_app.py:320
+#: tonfa_app.py:363 tonfa_app.py:369
 msgid "Переходная посадка"
 msgstr ""
 
-#: tonfa_app.py:325 tonfa_app.py:331
+#: tonfa_app.py:365
+msgid "Натяг"
+msgstr ""
+
+#: tonfa_app.py:367
+msgid "Зазор"
+msgstr ""
+
+#: tonfa_app.py:374 tonfa_app.py:380
 msgid "Комбинированная посадка"
 msgstr ""
 
-#: tonfa_app.py:327
+#: tonfa_app.py:376
 msgid "Вал"
 msgstr ""
 
-#: tonfa_app.py:329
+#: tonfa_app.py:378
 msgid "Отверстие"
 msgstr ""
 

@@ -2,6 +2,7 @@ import re
 import sqlite3
 import gettext
 import os
+from multiprocessing import Process
 from pathlib import Path
 
 from kivymd.app import MDApp
@@ -135,7 +136,8 @@ class TonfaApp(MDApp):
         self.root.ids.screen_manager.current = "settings"
 
     def copy_bitcoin_address(self) -> None:
-        Clipboard.copy(self.BITCOIN_ADDRESS)
+        p = Process(target=Clipboard.copy, args=(self.BITCOIN_ADDRESS,))
+        p.start()
 
         MDSnackbar(
             MDSnackbarText(text=_("Адрес скопирован!")),
@@ -145,7 +147,8 @@ class TonfaApp(MDApp):
         ).open()
 
     def copy_etherium_address(self) -> None:
-        Clipboard.copy(self.ETHERIUM_ADDRESS)
+        p = Process(target=Clipboard.copy, args=(self.ETHERIUM_ADDRESS,))
+        p.start()
 
         MDSnackbar(
             MDSnackbarText(text=_("Адрес скопирован!")),
@@ -155,7 +158,8 @@ class TonfaApp(MDApp):
         ).open()
 
     def copy_solana_address(self) -> None:
-        Clipboard.copy(self.SOLANA_ADDRESS)
+        p = Process(target=Clipboard.copy, args=(self.SOLANA_ADDRESS,))
+        p.start()
 
         MDSnackbar(
             MDSnackbarText(text=_("Адрес скопирован!")),
@@ -165,10 +169,31 @@ class TonfaApp(MDApp):
         ).open()
 
     def fill_labels(self) -> None:
-        diameter = float(self.root.ids.diameter_text_field.text)
+        diameter = self.root.ids.diameter_text_field.text
+        if diameter == "":
+            MDSnackbar(
+                MDSnackbarText(text=_("Не указан диаметр")),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20),
+            ).open()
+
+            return None
+        else:
+            diameter = float(diameter)
+
         shaft_tolerance_class = (
             self.root.ids.shaft_tolerance_class_text_field.text
         )
+        if shaft_tolerance_class == "":
+            MDSnackbar(
+                MDSnackbarText(text=_("Не указан класс допуска вала")),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20),
+            ).open()
+
+            return None
 
         es_label = self.root.ids.es_label
         ei_label = self.root.ids.ei_label
@@ -243,6 +268,15 @@ class TonfaApp(MDApp):
         hole_tolerance_class = (
             self.root.ids.hole_tolerance_class_text_field.text
         )
+        if hole_tolerance_class == "":
+            MDSnackbar(
+                MDSnackbarText(text=_("Не указан класс допуска отверстия")),
+                pos=("10dp", "10dp"),
+                size_hint_x=None,
+                width=self.root.width - dp(20),
+            ).open()
+
+            return None
 
         ES_label = self.root.ids.ES_label
         EI_label = self.root.ids.EI_label
