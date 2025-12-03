@@ -96,6 +96,7 @@ class TonfaApp(MDApp):
                             is_selected,
                             lang=lang: self.change_language(lang, is_selected),
                             group="lang",
+                            active=Config.getdefault("tonfa", "lang", "ru") == lang
                         ),
                         theme_bg_color="Custom",
                         md_bg_color=self.theme_cls.transparentColor,
