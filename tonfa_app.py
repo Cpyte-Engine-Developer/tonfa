@@ -202,7 +202,7 @@ class TonfaApp(MDApp):
 
         try:
             shaft_fundamental_deviation = re.match(
-                r"[a-z]|js", shaft_tolerance_class
+                r"js|[a-z]", shaft_tolerance_class
             )[0]
 
             shaft_min_diameter = int(
@@ -285,7 +285,7 @@ class TonfaApp(MDApp):
 
         try:
             hole_fundamental_deviation = re.match(
-                r"[A-Z]|JS", hole_tolerance_class
+                r"JS|[A-Z]", hole_tolerance_class
             )[0]
 
             hole_min_diameter = int(
