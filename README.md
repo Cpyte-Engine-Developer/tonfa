@@ -32,31 +32,38 @@
 Существуют 2 способа установки приложения на android:
 1. Зайти на оф. сайт [f-droid](https://f-droid.org/) или [мобильное приложение](https://f-droid.org/F-Droid.apk) и скачать и установить оттуда приложение tonfa.
 2. Выполнить следующие команды (необходим установленный git, docker):
+- Включить режим разработчика на своем телефоне.
+- Включить режим отладки.
+- Подключиться к телефону.
+- Выполнить в терминале следующие команды.
 ```sh
-# TODO: Вставить команду с git для скачивания проекта
-docker build --tag=kivy/buildozer .
-docker run --interactive --tty --rm \
-    --volume "$HOME/.buildozer":/home/user/.buildozer \
-    --volume "$PWD":/home/user/hostcwd \
-    kivy/buildozer android release
+git clone https://github.com/Cpyte-Engine-Developer/tonfa.git
+cd tonfa
+keytool -genkey -v -keystore tonfa.keystore -alias tonfa -keyalg RSA -keysize 2048 -validity 10000
+sh build_and_compile.sh
+adb install -r bin/tonfa-0.0.1-arm64-v8a-release-signed.apk
 ```
-После чего вы сможете перекинуть apk файл на android и оттуда установить его.
 
 ### Требования
 Для установки и запуска проекта, необходим 
 1. [Docker](https://www.docker.com/) 26.1.5+ 
 2. [Git](https://git-scm.com/) 2.47.3+
+3. [Zipalign](https://github.com/blattmann/zipalign)
+4. [ADB](https://developer.android.com/tools/adb?hl=ru)
+5. [ApkSigner](https://developer.android.com/tools/apksigner?hl=ru)
+6. [KeyTool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html)
 
 ### Установка зависимостей
 Для Ubuntu/Debian выполните команду:
 ```sh
 sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git zipalign adb apksigner default-jdk
 ```
 
 Для MacOS выполните команду:
 ```sh
-brew install --cask docker
+brew install --cask docker android-commandline-tools
+brew install git openjdk@21
 ```
 
 Для Windows выполните следующие действия:

@@ -10,3 +10,6 @@ bin/*
 
 # Virtual environments
 .venv
+
+# Hidden files and directories
+.*
