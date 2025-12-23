@@ -1,11 +1,10 @@
 # Tonfa
-Приложение tonfa позволяет считать допуски и посадки все что связано с ними.
+Приложение tonfa позволяет считать допуски и посадки, а также то, что связано с ними.
 
 ![Bitcoin](https://img.shields.io/badge/bitcoin-2F3134?style=for-the-badge&logo=bitcoin&logoColor=white)
 ![Solana](https://img.shields.io/badge/solana-%239945FF.svg?style=for-the-badge&logo=solana&logoColor=white)
 ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D?style=for-the-badge&logo=Ethereum&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
-<!-- ![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black) -->
 ![Github-sponsors](https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=#EA4AAA)
 ![uv](https://img.shields.io/badge/uv-%23DE5FE9.svg?style=for-the-badge&logo=uv&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -78,5 +77,5 @@ brew install git openjdk@21
 <!-- Если потребители вашего кода часто задают одни и те же вопросы, добавьте ответы на них в этом разделе. -->
 
 ## Команда проекта
-- [Арман Меликбекян](amelikbekan@gmail.com) - Главный разработчик проекта
+- [Cpyte-Engine-Developer](amelikbekan@gmail.com) - Главный разработчик проекта
 
