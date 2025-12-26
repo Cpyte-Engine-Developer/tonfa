@@ -39,7 +39,7 @@
 git clone https://github.com/Cpyte-Engine-Developer/tonfa.git
 cd tonfa
 keytool -genkey -v -keystore tonfa.keystore -alias tonfa -keyalg RSA -keysize 2048 -validity 10000
-sh build_and_compile.sh
+sh build.sh
 adb install -r bin/tonfa-0.0.1-arm64-v8a-release-signed.apk
 ```
 

@@ -4,6 +4,7 @@ import gettext
 import os
 from multiprocessing import Process
 from pathlib import Path
+from decimal import Decimal
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
@@ -355,10 +356,14 @@ class TonfaApp(MDApp):
         fit_system_label = self.root.ids.fit_system_label
 
         maximum_clearance_label.text = str(
-            hole_limit_deviations[1] - shaft_limit_deviations[0]
+            round(
+                hole_limit_deviations[1] - shaft_limit_deviations[0], 3
+            )
         )
         minimum_clearance_label.text = str(
-            hole_limit_deviations[0] - shaft_limit_deviations[1]
+            round(
+            hole_limit_deviations[0] - shaft_limit_deviations[1], 3
+            )
         )
 
         if (
