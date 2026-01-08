@@ -4,7 +4,6 @@ import gettext
 import os
 from multiprocessing import Process
 from pathlib import Path
-from decimal import Decimal
 
 from kivymd.app import MDApp
 from kivymd.uix.snackbar import MDSnackbar, MDSnackbarText
